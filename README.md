@@ -9,13 +9,13 @@
 
 [Overview](#overview) · [Getting Started](#getting-started) · [Usage](#usage) · [Metrics](#metrics) · [Project Structure](#project-structure) · [Citation](#citation) · [License](#license)
 
-[Read the manuscript](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Manuscript_1.0.2.pdf) · [Download the validated Overleaf ZIP](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Overleaf_1.0.2_Colab_Validated_6f3dbfa.zip) · [Browse the documentation](docs/README.md)
+[Read the manuscript](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Manuscript_1.0.2.pdf) · [Download the final Overleaf ZIP](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Overleaf_1.0.2_Colab_Overleaf_Validated_2c3188e.zip) · [Browse the documentation](docs/README.md)
 
-**For Overleaf, download `Complex_Voronoi_Overleaf_1.0.2_Colab_Validated_6f3dbfa.zip` using the link above.** This recommended package contains the manuscript, figures, complete computational companion, and records of the direct Colab validation of all four v1.0.2 notebooks. In Overleaf, choose **New project → Existing project (.zip)**, upload this ZIP, and compile `main.tex`. The original ZIP remains in the release for archival purposes; the recommended package adds the validation documentation without changing the manuscript or figures.
+**For Overleaf, download `Complex_Voronoi_Overleaf_1.0.2_Colab_Overleaf_Validated_2c3188e.zip` using the link above.** This recommended package contains the manuscript, figures, complete computational companion, and records of both the direct Colab validation of all four v1.0.2 notebooks and the Overleaf compilation and figure-preservation checks. In Overleaf, choose **New project → Existing project (.zip)**, upload this ZIP, and compile `main.tex`. The original ZIP remains in the release for archival purposes; the recommended package adds the validation documentation without changing the manuscript or figures.
 
 > **Research companion.** Reproduce the paper from source, inspect the trial-level results, or launch one of the four CPU notebooks below. No external dataset or GitHub credentials are needed.
 
-**Validated in Overleaf (19 October 2026):** the recommended ZIP compiled to 14 pages with **0 errors and 0 warnings**. All five figures were preserved; all 14 rendered pages match the previous validated PDF. [Open the validated project](https://www.overleaf.com/project/6ad60897f64e207c3401375d) · [Verification record](validation/overleaf_colab_validated_v1.0.2/README.md).
+**Validated in Overleaf (19 October 2026):** the preceding Colab-validated package compiled to 14 pages with **0 errors and 0 warnings**. The final ZIP linked above adds the Overleaf validation records; its manuscript and figure files are byte-identical to that compiled package. All five figures were preserved; all 14 rendered pages match the previous validated PDF. [Open the validated project](https://www.overleaf.com/project/6ad60897f64e207c3401375d) · [Verification record](validation/overleaf_colab_validated_v1.0.2/README.md).
 
 ## Overview
 
