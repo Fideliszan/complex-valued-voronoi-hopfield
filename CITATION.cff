@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite this software and the accompanying manuscript."
 type: software
 title: "Voronoi-Based Activation Functions and Inertial Energy for Complex-Valued Hopfield Networks: Computational Companion"
-version: 1.0.0
+version: 1.0.1
 date-released: 2026-10-18
 url: "https://github.com/Fideliszan/complex-valued-voronoi-hopfield"
 repository-code: "https://github.com/Fideliszan/complex-valued-voronoi-hopfield"
