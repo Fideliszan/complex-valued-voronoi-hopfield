@@ -16,6 +16,12 @@ The journal currently uses **double-anonymous review**. The identified public co
 
 A regular paper may have at most **15 pages** with overlength charges; charges apply above **10 pages**, at **USD 200 per printed excess page** under the current instructions. Thus a 14-page version is within the stated maximum but has four excess pages (USD 800 if the final printed length remains 14 pages). This review does not authorize payment or submission.
 
-Authors must supply accurate contact details and ORCIDs in the submission portal. Author biographies are relevant to accepted-paper production and must be supplied by the authors. If AI-generated text is used in the article, the current instructions require disclosure in acknowledgements and citation of the AI system in affected sections; the scope of any such use must be confirmed by the authors. No unsupported authorship, funding, originality or disclosure statements have been inserted.
+Authors must supply accurate contact details and ORCIDs in the submission portal. Author biographies are relevant to accepted-paper production and must be supplied by the authors. If AI-generated text is used in the article, the current instructions require disclosure in acknowledgements and citation of the AI system in affected sections; the scope of any such use must be confirmed by the authors. No unsupported authorship, funding or originality statements have been inserted. The subsequent author-provided AI disclosure is recorded below.
 
 The format review confirms the technical layout and records these remaining author-controlled submission requirements. It is not editorial acceptance or certification that all portal declarations have been completed.
+
+## Author-provided AI-use disclosure
+
+The authors subsequently supplied and approved an explicit disclosure of ChatGPT/Codex assistance with English editing, grammar, and literature curation. It is included verbatim in `paper/main.tex`, in an unnumbered Acknowledgments section before the references. The historical compilation records above predate this text addition. This update records the author statement; it does not independently certify the scope of author review or alter the statement supplied by the authors.
+
+The updated `main.tex` compiled successfully using the desktop editor LaTeX compiler on 19 October 2026. This is a local compilation check, not a new Overleaf run.
