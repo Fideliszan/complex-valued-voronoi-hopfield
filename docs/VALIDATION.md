@@ -26,6 +26,10 @@ All five paper figures were generated. Their six plotting-data CSVs matched afte
 
 The record preserves live audit outputs and package versions. Raw-output ZIP and executed-notebook downloads did not complete; earlier `validation/hosted` data are separate evidence. The v1.0.2 release assets and tag remain unchanged.
 
+## Overleaf validation of the updated ZIP
+
+The Colab-validated ZIP was imported into a [new Overleaf project](https://www.overleaf.com/project/6ad60897f64e207c3401375d) on 19 October 2026. It compiled to **14 pages with 0 errors and 0 warnings**. All 14 rendered pages match the previous validated PDF at the tested resolution, preserving all five figures and the page layout. The imported project also contains both Colab validation records. See the [verification method and package identity](../validation/overleaf_colab_validated_v1.0.2/README.md) and [structured record](../validation/overleaf_colab_validated_v1.0.2/validation.json).
+
 ## Run the checks
 
 The four distributed notebooks also completed a full local execution from top to bottom. Their saved outputs are actual execution results. [Notebook records](../validation/notebook_execution.json) identify the executed code cells, and the [numerical comparison](../validation/local_comparison.json) records zero differences in the compared saturation and recall metrics. All six geometry plotting-data files match their publication counterparts. These checks exercise the local setup path; the public Colab setup uses the tagged GitHub clone described in [Colab instructions](COLAB.md).

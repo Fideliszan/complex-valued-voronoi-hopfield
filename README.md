@@ -15,6 +15,8 @@
 
 > **Research companion.** Reproduce the paper from source, inspect the trial-level results, or launch one of the four CPU notebooks below. No external dataset or GitHub credentials are needed.
 
+**Validated in Overleaf (19 October 2026):** the recommended ZIP compiled to 14 pages with **0 errors and 0 warnings**. All five figures were preserved; all 14 rendered pages match the previous validated PDF. [Open the validated project](https://www.overleaf.com/project/6ad60897f64e207c3401375d) · [Verification record](validation/overleaf_colab_validated_v1.0.2/README.md).
+
 ## Overview
 
 An associative memory stores patterns and attempts to recover them from corrupted cues. In this work each neuron takes a symbol from a finite subset of the complex plane, encoding both phase and magnitude. The question is how the local update should respect that geometry while retaining an energy descent guarantee.
