@@ -9,7 +9,9 @@
 
 [Overview](#overview) · [Getting Started](#getting-started) · [Usage](#usage) · [Metrics](#metrics) · [Project Structure](#project-structure) · [Citation](#citation) · [License](#license)
 
-[Read the manuscript](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Manuscript_1.0.2.pdf) · [Download the Overleaf project](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Overleaf_1.0.2.zip) · [Browse the documentation](docs/README.md)
+[Read the manuscript](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Manuscript_1.0.2.pdf) · [Download the validated Overleaf ZIP](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Overleaf_1.0.2_Colab_Validated_6f3dbfa.zip) · [Browse the documentation](docs/README.md)
+
+**For Overleaf, download `Complex_Voronoi_Overleaf_1.0.2_Colab_Validated_6f3dbfa.zip` using the link above.** This recommended package contains the manuscript, figures, complete computational companion, and records of the direct Colab validation of all four v1.0.2 notebooks. In Overleaf, choose **New project → Existing project (.zip)**, upload this ZIP, and compile `main.tex`. The original ZIP remains in the release for archival purposes; the recommended package adds the validation documentation without changing the manuscript or figures.
 
 > **Research companion.** Reproduce the paper from source, inspect the trial-level results, or launch one of the four CPU notebooks below. No external dataset or GitHub credentials are needed.
 
