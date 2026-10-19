@@ -1,0 +1,176 @@
+{
+  "activation_cost": {
+    "timing_records": 600,
+    "minimum_agreement": 1.0,
+    "boundary_disagreements": 0,
+    "cardinalities": [
+      16,
+      64,
+      256,
+      1024
+    ],
+    "timings_expected_to_differ": true
+  },
+  "query_array_max_abs_differences": {
+    "Hexagonal_1024_local_fields.npz": {
+      "field": 8.005932084973443e-16,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Hexagonal_1024_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Hexagonal_16_local_fields.npz": {
+      "field": 1.2947314098277873e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Hexagonal_16_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Hexagonal_256_local_fields.npz": {
+      "field": 1.1363696703589205e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Hexagonal_256_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Hexagonal_64_local_fields.npz": {
+      "field": 1.3334236103572998e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Hexagonal_64_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_1024_local_fields.npz": {
+      "field": 3.781283367737843e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_1024_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_16_local_fields.npz": {
+      "field": 2.2232198742534223e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_16_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_256_local_fields.npz": {
+      "field": 1.6883057536160648e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_256_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_64_local_fields.npz": {
+      "field": 2.7399406787778174e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "PSK_64_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_1024_local_fields.npz": {
+      "field": 8.163159687020606e-16,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_1024_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_16_local_fields.npz": {
+      "field": 7.871287462095217e-16,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_16_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_256_local_fields.npz": {
+      "field": 1.0087920413118926e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_256_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_64_local_fields.npz": {
+      "field": 7.318559657447923e-16,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "Polar_64_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_1024_local_fields.npz": {
+      "field": 1.0235750533041808e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_1024_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_16_local_fields.npz": {
+      "field": 1.1775693440128313e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_16_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_256_local_fields.npz": {
+      "field": 1.0007415106216803e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_256_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_64_local_fields.npz": {
+      "field": 1.3334236103572998e-15,
+      "current": 0.0,
+      "alphabet": 0.0
+    },
+    "QAM_64_uniform.npz": {
+      "field": 0.0,
+      "current": 0.0,
+      "alphabet": 0.0
+    }
+  }
+}

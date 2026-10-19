@@ -1,0 +1,9 @@
+{
+  "compiler": "pdfLaTeX and BibTeX",
+  "environment": "local",
+  "pages": 14,
+  "errors": 0,
+  "warnings": [],
+  "source_sha256": "fbe650727ef288c3c1ccdf955b8a67c034331776d691b7626bd2b8fd0052b81c",
+  "pdf_sha256": "ac4499c778e360d28723ca05b59b1daf8aab4adf35c84020d6d15b53c5dd09c9"
+}

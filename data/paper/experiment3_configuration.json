@@ -1,0 +1,34 @@
+{
+  "SCIPY_AVAILABLE": true,
+  "SCIPY_IMPORT_ERROR": "",
+  "RANDOM_SEED": 20260901,
+  "FAMILIES": [
+    "PSK",
+    "QAM",
+    "Polar",
+    "Hexagonal"
+  ],
+  "CARDINALITIES": [
+    16,
+    64,
+    256,
+    1024
+  ],
+  "N_QUERY_UNIFORM": 20000,
+  "N_QUERY_FIELDS": 20000,
+  "N_REPEATS": 5,
+  "CHUNK_SIZE": 4096,
+  "IMAGE_SHAPE": [
+    24,
+    24
+  ],
+  "P_FIELDS": 4,
+  "FIELD_HSV_NOISE": 0.1,
+  "FIELD_SWEEPS": 3,
+  "MIN_FIELD_TRIALS": 10,
+  "PINV_RCOND": 1e-10,
+  "KD_WORKERS": 1,
+  "FIG_DPI": 300,
+  "SAVE_FIGURES": false,
+  "OVERWRITE_OUTPUT_DIR": true
+}

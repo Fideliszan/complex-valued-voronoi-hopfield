@@ -1,0 +1,14 @@
+{
+  "configurations": 120,
+  "timing_records": 600,
+  "cardinalities": [
+    16,
+    64,
+    256,
+    1024
+  ],
+  "distinct_queries": 640000,
+  "minimum_query_agreement": 1.0,
+  "boundary_decisions": 61380,
+  "boundary_disagreements": 0
+}

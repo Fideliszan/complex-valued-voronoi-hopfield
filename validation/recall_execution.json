@@ -1,0 +1,67 @@
+{
+  "stage": "recall",
+  "mode": "full",
+  "engine": "independent",
+  "configuration": {
+    "RANDOM_SEED": 20260901,
+    "IMAGE_SHAPE": [
+      24,
+      24
+    ],
+    "V0": 0.8,
+    "ALPHABETS_TO_RUN": [
+      "64-PSK",
+      "64-QAM",
+      "64-Polar",
+      "61-Hexagonal"
+    ],
+    "P_NOISE": 4,
+    "N_TRIALS_NOISE": 30,
+    "SYMBOL_NOISE_LEVELS": [
+      0.0,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "HSV_NOISE_LEVELS": [
+      0.0,
+      0.02,
+      0.05,
+      0.1,
+      0.15
+    ],
+    "P_LOAD_VALUES": [
+      1,
+      2,
+      4,
+      6
+    ],
+    "N_TRIALS_LOAD": 2,
+    "LOAD_CORRUPTION_KIND": "symbol",
+    "LOAD_NOISE_LEVEL": 0.1,
+    "MAX_SWEEPS": 80,
+    "TIE_ATOL": 1e-12,
+    "MONOTONICITY_TOL": 1e-09,
+    "PINV_RCOND": 1e-10,
+    "SAVE_FIGURES": true,
+    "SAVE_OPTIONAL_PLOTS": false,
+    "FIG_DPI": 300,
+    "IMAGE_UPSCALE": 10,
+    "VISUAL_ALPHABET": "64-QAM",
+    "VISUAL_P": 4,
+    "VISUAL_TARGET_MU": 0,
+    "VISUAL_CORRUPTION_KIND": "hsv",
+    "VISUAL_NOISE_LEVEL": 0.1,
+    "OVERWRITE_OUTPUT_DIR": true
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1"
+  },
+  "blas_threads": 1,
+  "seconds": 198.66508390000672
+}

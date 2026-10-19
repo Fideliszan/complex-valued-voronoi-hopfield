@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+.pytest_cache/
+.matplotlib/
+runs/
+*.aux
+*.log
+*.out
+*.blg
+*.synctex.gz
+paper/main.pdf
+paper/main.bbl

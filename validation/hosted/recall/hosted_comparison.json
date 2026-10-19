@@ -1,0 +1,282 @@
+{
+  "experiment2_noise_results.csv": {
+    "rows": 2400,
+    "reference_rows": 2400,
+    "keys_match": true,
+    "differences": {
+      "alphabet": {
+        "equal": true
+      },
+      "alphabet_size": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "N": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "P": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "P_over_N": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "target_mu": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "corruption_kind": {
+        "equal": true
+      },
+      "noise_level": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "trial_seed": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rule": {
+        "equal": true
+      },
+      "initial_SER": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "SER": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "exact_recovery": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "complex_similarity": {
+        "max_abs": 4.440892098500626e-16,
+        "same_missing": true
+      },
+      "radial_error": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "angular_error_cycles": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rgb_psnr": {
+        "max_abs": 7.105427357601002e-15,
+        "same_missing": true
+      },
+      "sweeps": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "attempted_updates": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "changed_updates": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "converged": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "lyapunov_sweep_violations": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "initial_E_c": {
+        "max_abs": 3.979039320256561e-13,
+        "same_missing": true
+      },
+      "final_E_c": {
+        "max_abs": 3.410605131648481e-13,
+        "same_missing": true
+      },
+      "initial_E_r": {
+        "max_abs": 3.979039320256561e-13,
+        "same_missing": true
+      },
+      "final_E_r": {
+        "max_abs": 3.4106051316484804e-13,
+        "same_missing": true
+      },
+      "delta_E_c": {
+        "max_abs": 2.2737367544323206e-13,
+        "same_missing": true
+      },
+      "delta_E_r": {
+        "max_abs": 2.2737367544323206e-13,
+        "same_missing": true
+      },
+      "rank_gram": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "projection_residual": {
+        "max_abs": 4.1003918756871077e-16,
+        "same_missing": true
+      },
+      "hermitian_error": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "min_diag_real": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "diag_nonnegative": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "experiment": {
+        "equal": true
+      }
+    },
+    "pass_at_1e-9": true
+  },
+  "experiment2_load_results.csv": {
+    "rows": 64,
+    "reference_rows": 64,
+    "keys_match": true,
+    "differences": {
+      "alphabet": {
+        "equal": true
+      },
+      "alphabet_size": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "N": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "P": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "P_over_N": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "target_mu": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "corruption_kind": {
+        "equal": true
+      },
+      "noise_level": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "trial_seed": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rule": {
+        "equal": true
+      },
+      "initial_SER": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "SER": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "exact_recovery": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "complex_similarity": {
+        "max_abs": 1.1102230246251565e-16,
+        "same_missing": true
+      },
+      "radial_error": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "angular_error_cycles": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rgb_psnr": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "sweeps": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "attempted_updates": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "changed_updates": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "converged": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "lyapunov_sweep_violations": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "initial_E_c": {
+        "max_abs": 2.8421709430404007e-13,
+        "same_missing": true
+      },
+      "final_E_c": {
+        "max_abs": 2.8421709430404007e-13,
+        "same_missing": true
+      },
+      "initial_E_r": {
+        "max_abs": 2.6290081223123707e-13,
+        "same_missing": true
+      },
+      "final_E_r": {
+        "max_abs": 2.8421709430404e-13,
+        "same_missing": true
+      },
+      "delta_E_c": {
+        "max_abs": 8.526512829121202e-14,
+        "same_missing": true
+      },
+      "delta_E_r": {
+        "max_abs": 8.526512829121202e-14,
+        "same_missing": true
+      },
+      "rank_gram": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "projection_residual": {
+        "max_abs": 4.1003918756871077e-16,
+        "same_missing": true
+      },
+      "hermitian_error": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "min_diag_real": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "diag_nonnegative": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "experiment": {
+        "equal": true
+      }
+    },
+    "pass_at_1e-9": true
+  }
+}

@@ -1,0 +1,14 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.tex text eol=lf
+*.csv text eol=lf
+*.ipynb text eol=lf
+*.png binary
+*.pdf binary
+data/** -text
+configs/** -text
+
+validation/** -text
+figures/source_data/** -text
+*.npz binary

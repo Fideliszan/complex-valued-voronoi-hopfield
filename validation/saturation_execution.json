@@ -1,0 +1,30 @@
+{
+  "stage": "saturation",
+  "mode": "full",
+  "engine": "independent",
+  "configuration": {
+    "RANDOM_SEED": 20260831,
+    "N": 100,
+    "N_RUNS": 100,
+    "MAX_SWEEPS": 80,
+    "DIAGONAL_VALUE": 0.0,
+    "COUPLING_SCALE": 1.0,
+    "INITIALIZATION_PROTOCOLS": [
+      "uniform",
+      "inner"
+    ],
+    "FIG_DPI": 300,
+    "TIE_ATOL": 1e-12,
+    "BOUNDARY_ATOL": 1e-10,
+    "MONOTONICITY_TOL": 1e-10
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1"
+  },
+  "blas_threads": 1,
+  "seconds": 75.38294489998952
+}

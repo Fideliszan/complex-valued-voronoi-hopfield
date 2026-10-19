@@ -1,0 +1,150 @@
+{
+  "experiment1_final_runs.csv": {
+    "rows": 1600,
+    "reference_rows": 1600,
+    "keys_match": true,
+    "differences": {
+      "sweep": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "attempted_updates": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "E_c": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "E_r": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rho": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "boundary_fraction": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "alphabet": {
+        "equal": true
+      },
+      "init_protocol": {
+        "equal": true
+      },
+      "run": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "seed": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rule": {
+        "equal": true
+      },
+      "initial_E_c": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "initial_E_r": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "initial_rho": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "initial_boundary_fraction": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "delta_E_c": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "delta_E_r": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "delta_rho": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "delta_boundary_fraction": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "steps_to_convergence": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "converged": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "monotonicity_violations": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "lyapunov_column": {
+        "equal": true
+      }
+    },
+    "pass_at_1e-9": true
+  },
+  "experiment1_trajectories.csv": {
+    "rows": 129600,
+    "reference_rows": 129600,
+    "keys_match": true,
+    "differences": {
+      "sweep": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "attempted_updates": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "E_c": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "E_r": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rho": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "boundary_fraction": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "alphabet": {
+        "equal": true
+      },
+      "init_protocol": {
+        "equal": true
+      },
+      "run": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "seed": {
+        "max_abs": 0.0,
+        "same_missing": true
+      },
+      "rule": {
+        "equal": true
+      },
+      "lyapunov_column": {
+        "equal": true
+      }
+    },
+    "pass_at_1e-9": true
+  }
+}

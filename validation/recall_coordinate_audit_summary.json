@@ -1,0 +1,10 @@
+{
+  "implementation": "independent equation-based kernels",
+  "trajectories": 2466,
+  "changed_updates": 1122553,
+  "coordinate_energy_increases": 0,
+  "nonnegative_energy_changes": 0,
+  "terminal_rule_violations": 0,
+  "max_field_residual": 1.820767875900462e-14,
+  "max_energy_accumulation_residual": 7.389644451905042e-13
+}

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite this software and the accompanying manuscript."
+type: software
+title: "Voronoi-Based Activation Functions and Inertial Energy for Complex-Valued Hopfield Networks: Computational Companion"
+version: 1.0.0
+date-released: 2026-10-18
+url: "https://github.com/Fideliszan/complex-valued-voronoi-hopfield"
+repository-code: "https://github.com/Fideliszan/complex-valued-voronoi-hopfield"
+license: MIT
+authors:
+  - family-names: "de Castro"
+    given-names: "Fidelis Zanetti"
+  - family-names: "Valle"
+    given-names: "Marcos Eduardo"
+  - family-names: "Papa"
+    given-names: "João P."
+  - family-names: "Lobo"
+    given-names: "Rodolfo Anibal"

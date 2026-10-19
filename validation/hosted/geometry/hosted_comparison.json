@@ -1,0 +1,12 @@
+{
+  "paper_visual_metrics": {
+    "trial_seed": 0.0,
+    "initial_SER": 0.0,
+    "SER": 0.0,
+    "exact_recovery": 0.0,
+    "radial_error": 0.0,
+    "complex_similarity": 0.0,
+    "angular_error_cycles": 0.0,
+    "rgb_psnr": 0.0
+  }
+}

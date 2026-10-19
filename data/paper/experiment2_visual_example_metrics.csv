@@ -1,0 +1,3 @@
+rule,alphabet,P,target_mu,corruption_kind,noise_level,initial_SER,SER,exact_recovery,radial_error,complex_similarity,angular_error_cycles,rgb_psnr,sweeps,changed_updates,converged,lyapunov_sweep_violations,projection_residual
+classic,64-QAM,4,0,hsv,0.1,0.78125,0.9930555555555556,0.0,0.5124759077509083,0.6978886932433248,0.10103127866932819,9.103178691987118,12,760,1.0,0,1.0456792406779106e-15
+voronoi,64-QAM,4,0,hsv,0.1,0.78125,0.5138888888888888,0.0,0.1022946391107221,0.9734313768840502,0.01669738397846849,21.224096873099853,16,644,1.0,0,1.0456792406779106e-15
