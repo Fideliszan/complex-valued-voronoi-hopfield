@@ -7,3 +7,5 @@ The [direct v1.0.2 Colab validation](colab_v1.0.2/README.md) records execution o
 The [Overleaf validation of the updated ZIP](overleaf_colab_validated_v1.0.2/README.md) records the new project link, successful compilation, preservation of all five figures, and inclusion of the Colab records.
 
 Final checks cover the [exact final identified ZIP](overleaf_final_v1.0.2/README.md) and the separate [anonymous TNNLS review copy](tnnls_anonymous_v1.0.2/README.md).
+
+The [AI-disclosure Overleaf validation](overleaf_ai_disclosure_v1.0.2/README.md) confirms 14 pages, zero errors and warnings, and the exact declaration on page 13. This record is included in the final complete delivery ZIP.

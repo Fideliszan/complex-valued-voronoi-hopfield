@@ -49,3 +49,5 @@ The theorem concerns exact minimizers; the implementation has explicit floating-
 ## Final release archive and anonymous review copy
 
 The [exact final identified ZIP](../validation/overleaf_final_v1.0.2/README.md) was subsequently imported and compiled in Overleaf, confirming both validation directories and all five figures. A separate [anonymous manuscript-only copy](../validation/tnnls_anonymous_v1.0.2/README.md) also compiled with zero errors and warnings. Both PDFs have 14 pages. See the [TNNLS format review](TNNLS_FINAL_REVIEW.md) for submission-specific requirements.
+
+The [AI-disclosure Overleaf validation](../validation/overleaf_ai_disclosure_v1.0.2/README.md) confirms 14 pages, zero errors and warnings, and the exact declaration on page 13. This record is included in the final complete delivery ZIP.
