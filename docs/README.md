@@ -12,3 +12,5 @@
 8. [Gallery](GALLERY.md): figures with downloadable vector files.
 9. [Validation](VALIDATION.md): scientific checks and their limits.
 10. [Environment](ENVIRONMENT.md): dependencies and numerical environment.
+
+11. [Reference notes](REFERENCE_NOTES.md): source attribution and bibliographic corrections.

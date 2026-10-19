@@ -3,11 +3,10 @@
 ## Alphabet geometry
 
 The illustrative alphabet has 12 deliberately spaced symbols. Each diagram
-identifies the finite alphabet, a selected cell, its shared face with a neighboring
-cell, the full perpendicular bisector, and the maximum-modulus symbols. A dotted
+identifies the finite alphabet, exact cell boundaries, and maximum-modulus symbols. Pastel fills distinguish adjacent cells. A dotted
 circle shows the maximum radius; it is not a Voronoi boundary. The four experimental
 alphabets retain exactly the coordinates used in the simulations and appear in
-one row. Solid, dashed, and dotted lines and hollow rings remain distinct in grayscale.
+one row. Solid and dotted lines and hollow rings remain distinct in grayscale.
 
 ![Irregular finite alphabet](../figures/generic_voronoi.png)
 

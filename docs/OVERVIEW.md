@@ -8,7 +8,7 @@ The classical and inertial energies can both be evaluated on any trajectory. Onl
 
 ## Geometry
 
-Closed Voronoi cells can share boundaries. Figures clip exact half-plane intersections to a plotting window. The generic figure uses 12 explicitly specified, separated symbols; it is not an additional retrieval experiment. The four regular panels use the actual Experiment 1 alphabets. Filled points mark symbols, hollow rings identify maximum-modulus symbols, and each panel distinguishes a selected cell, a perpendicular bisector, and the active shared face.
+Closed Voronoi cells can share boundaries. Figures clip exact half-plane intersections to a plotting window. The generic figure uses 12 explicitly specified, separated symbols; it is not an additional retrieval experiment. The four regular panels use the actual Experiment 1 alphabets. Filled points mark symbols, hollow rings identify maximum-modulus symbols, and thin lines delimit the Voronoi cells. Muted fills distinguish adjacent cells without encoding numerical values.
 
 ## Scope
 
