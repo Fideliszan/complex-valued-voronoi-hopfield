@@ -1,0 +1,261 @@
+{
+  "geometry": {
+    "host": "Google Colab",
+    "revision": "c3fc72a05ac64c7af029cac7bbe927ca883c03f0",
+    "mode": "full",
+    "figures": {
+      "generic_voronoi": {
+        "reference_size": [
+          2094,
+          2360
+        ],
+        "new_size": [
+          2084,
+          2360
+        ],
+        "pixel_identical": false
+      },
+      "constellations": {
+        "reference_size": [
+          4499,
+          1496
+        ],
+        "new_size": [
+          4492,
+          1487
+        ],
+        "pixel_identical": false
+      },
+      "saturation_diagnostics": {
+        "reference_size": [
+          4089,
+          2889
+        ],
+        "new_size": [
+          4089,
+          2889
+        ],
+        "pixel_identical": false
+      },
+      "hsv_recall": {
+        "reference_size": [
+          3368,
+          3489
+        ],
+        "new_size": [
+          3377,
+          3489
+        ],
+        "pixel_identical": false
+      },
+      "activation_scaling": {
+        "reference_size": [
+          4440,
+          2940
+        ],
+        "new_size": [
+          4440,
+          2940
+        ],
+        "pixel_identical": false
+      }
+    },
+    "source_data_byte_identical": {
+      "activation_scaling.csv": true,
+      "geometry_alphabets.csv": true,
+      "irregular_symbols.csv": false,
+      "paper_visual_metrics.csv": false,
+      "recall_plot.csv": false,
+      "saturation_plot.csv": false
+    }
+  },
+  "saturation": {
+    "host": "Google Colab",
+    "mode": "full",
+    "commit": "c3fc72a05ac64c7af029cac7bbe927ca883c03f0",
+    "files": {
+      "experiment1_final_runs.csv": {
+        "rows": 1600,
+        "keys_match": true,
+        "maximum_absolute_difference": 0.0,
+        "differences_over_1e_minus_9": {}
+      },
+      "experiment1_trajectories.csv": {
+        "rows": 129600,
+        "keys_match": true,
+        "maximum_absolute_difference": 0.0,
+        "differences_over_1e_minus_9": {}
+      }
+    }
+  },
+  "recall": {
+    "host": "Google Colab",
+    "mode": "full",
+    "commit": "c3fc72a05ac64c7af029cac7bbe927ca883c03f0",
+    "files": {
+      "experiment2_noise_results.csv": {
+        "rows": 2400,
+        "keys_match": true,
+        "maximum_absolute_difference": 3.979039320256561e-13,
+        "differences_over_1e_minus_9": {}
+      },
+      "experiment2_load_results.csv": {
+        "rows": 64,
+        "keys_match": true,
+        "maximum_absolute_difference": 2.8421709430404007e-13,
+        "differences_over_1e_minus_9": {}
+      }
+    }
+  },
+  "activation_cost": {
+    "host": "Google Colab",
+    "mode": "full",
+    "commit": "c3fc72a05ac64c7af029cac7bbe927ca883c03f0",
+    "timing_rows": 600,
+    "reference_rows": 600,
+    "min_agreement": 1.0,
+    "boundary_columns": [
+      "family",
+      "cardinality",
+      "method",
+      "current_supplied",
+      "queries",
+      "disagreements"
+    ],
+    "boundary_summary": {
+      "cardinality": 61200,
+      "queries": 61380,
+      "disagreements": 0
+    },
+    "runtime": 67.84087809900001
+  },
+  "figure_data_and_fonts": {
+    "data": {
+      "activation_scaling.csv": {
+        "shape_equal": true,
+        "max_numeric_difference": 0.0,
+        "nonnumeric_equal": true
+      },
+      "geometry_alphabets.csv": {
+        "shape_equal": true,
+        "max_numeric_difference": 0.0,
+        "nonnumeric_equal": true
+      },
+      "irregular_symbols.csv": {
+        "shape_equal": true,
+        "max_numeric_difference": 0.0,
+        "nonnumeric_equal": true
+      },
+      "paper_visual_metrics.csv": {
+        "shape_equal": true,
+        "max_numeric_difference": 0.0,
+        "nonnumeric_equal": true
+      },
+      "recall_plot.csv": {
+        "shape_equal": true,
+        "max_numeric_difference": 0.0,
+        "nonnumeric_equal": true
+      },
+      "saturation_plot.csv": {
+        "shape_equal": true,
+        "max_numeric_difference": 0.0,
+        "nonnumeric_equal": true
+      }
+    },
+    "fonts": {
+      "activation_scaling.pdf": [
+        "/CCVYUO+TermesFigure-Regular"
+      ],
+      "hsv_recall.pdf": [
+        "/CCVYUO+TermesFigure-Regular"
+      ],
+      "constellations.pdf": [
+        "/CCVYUO+TermesFigure-Regular",
+        "/CZRBLR+STIXGeneral-Regular",
+        "/EUPODS+STIXNonUnicode-Italic",
+        "/FTXWZA+STIXGeneral-Italic"
+      ],
+      "generic_voronoi.pdf": [
+        "/CCVYUO+TermesFigure-Regular",
+        "/CZRBLR+STIXGeneral-Regular",
+        "/EUPODS+STIXNonUnicode-Italic",
+        "/FTXWZA+STIXGeneral-Italic"
+      ],
+      "saturation_diagnostics.pdf": [
+        "/CCVYUO+TermesFigure-Regular",
+        "/CZRBLR+STIXGeneral-Regular",
+        "/FTXWZA+STIXGeneral-Italic"
+      ],
+      "recall_summary.pdf": [
+        "/CCVYUO+TermesFigure-Regular"
+      ]
+    }
+  },
+  "notes": [
+    "All four v1.0.2 GitHub-linked notebooks completed full execution in Google Colab.",
+    "Validation cells were appended to live notebooks; published GitHub source was not modified.",
+    "Scientific data reproduce within 1e-9; PNGs are not pixel-identical across rendering environments.",
+    "Colab output ZIP and notebook downloads did not complete in the browser; evidence includes visible live outputs and screenshot."
+  ],
+  "validation_date": "2026-10-19",
+  "comparison_tolerance": 1e-09,
+  "evidence_scope": "Audit outputs transcribed from live Colab notebook cells; raw result ZIPs and executed notebook downloads were not retrieved.",
+  "notebooks": {
+    "00_geometry": {
+      "url": "https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/00_geometry.ipynb",
+      "host": "Google Colab",
+      "mode": "full",
+      "packages": {
+        "numpy": "2.1.3",
+        "pandas": "2.2.3",
+        "scipy": "1.16.3",
+        "matplotlib": "3.10.0",
+        "seaborn": "0.13.2",
+        "plotnine": "0.15.8"
+      },
+      "experiment_seconds": null
+    },
+    "01_saturation": {
+      "url": "https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/01_saturation.ipynb",
+      "host": "Google Colab",
+      "mode": "full",
+      "packages": {
+        "numpy": "2.1.3",
+        "pandas": "2.2.3",
+        "scipy": "1.16.3",
+        "matplotlib": "3.10.0",
+        "seaborn": "0.13.2",
+        "plotnine": "0.15.8"
+      },
+      "experiment_seconds": 91.37831596400002
+    },
+    "02_hsv_recall": {
+      "url": "https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/02_hsv_recall.ipynb",
+      "host": "Google Colab",
+      "mode": "full",
+      "packages": {
+        "numpy": "2.1.3",
+        "pandas": "2.2.3",
+        "scipy": "1.16.3",
+        "matplotlib": "3.10.0",
+        "seaborn": "0.13.2",
+        "plotnine": "0.15.8"
+      },
+      "experiment_seconds": 200.794386031
+    },
+    "03_activation_cost": {
+      "url": "https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/03_activation_cost.ipynb",
+      "host": "Google Colab",
+      "mode": "full",
+      "packages": {
+        "numpy": "2.1.3",
+        "pandas": "2.2.3",
+        "scipy": "1.16.3",
+        "matplotlib": "3.10.0",
+        "seaborn": "0.13.2",
+        "plotnine": "0.15.8"
+      },
+      "experiment_seconds": 67.84087809900001
+    }
+  }
+}

@@ -16,6 +16,16 @@ All 129,600 saturation history records agree exactly after CSV parsing. Recall o
 
 The geometry rendering reproduces the five paper figures, including the selected HSV image. The selected image is a disclosed successful case, while tables include all trials. The small load sweep is exploratory. Noise replicates use a fixed synthetic memory bank and are not independent memory-bank samples.
 
+## Public GitHub-to-Colab validation of v1.0.2
+
+On 19 October 2026, all four public GitHub-linked notebooks of **v1.0.2** completed full execution directly in Google Colab, including the tagged clone and dependency-installation setup. The [run record](../validation/colab_v1.0.2/README.md) and [structured audit](../validation/colab_v1.0.2/validation.json) document the exact source commit and observed environment.
+
+Saturation reproduced 1,600 final rows and 129,600 history rows exactly. The 2,400 noise-recall and 64 load-trial rows matched within 1e-9, with a maximum numerical difference below 4e-13. The benchmark produced 600 timing records, 100% activation agreement, and zero disagreements in 61,380 boundary queries.
+
+All five paper figures were generated. Their six plotting-data CSVs matched after parsing, and regular Termes figure typography was retained. PNGs are not pixel-identical across rendering environments, and newly measured benchmark timings are machine-dependent. Notebook 00 renders publication data and recomputes the selected image; notebooks 01-03 rerun the experimental protocols.
+
+The record preserves live audit outputs and package versions. Raw-output ZIP and executed-notebook downloads did not complete; earlier `validation/hosted` data are separate evidence. The v1.0.2 release assets and tag remain unchanged.
+
 ## Run the checks
 
 The four distributed notebooks also completed a full local execution from top to bottom. Their saved outputs are actual execution results. [Notebook records](../validation/notebook_execution.json) identify the executed code cells, and the [numerical comparison](../validation/local_comparison.json) records zero differences in the compared saturation and recall metrics. All six geometry plotting-data files match their publication counterparts. These checks exercise the local setup path; the public Colab setup uses the tagged GitHub clone described in [Colab instructions](COLAB.md).

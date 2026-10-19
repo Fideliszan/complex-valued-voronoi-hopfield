@@ -100,6 +100,8 @@ Run commands from the repository root. Choose a new output directory; existing r
 | HSV recall | Runs recall under symbol and HSV corruption | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/02_hsv_recall.ipynb) |
 | Activation cost | Benchmarks four alphabet cardinalities with exact decision checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/03_activation_cost.ipynb) |
 
+**Validated directly in Colab (19 October 2026):** all four v1.0.2 notebooks completed full execution from these GitHub links. Scientific results reproduced within 1e-9; all five paper figures were regenerated with matching plotting data and regular Termes typography. PNG rendering and hardware-dependent timings can differ. [Run record and evidence limits](validation/colab_v1.0.2/README.md).
+
 Select **Runtime → Run all**. Each notebook downloads the tagged public source, defaults to `MODE = "full"`, records its environment, and exports its results. Use `"smoke"` for a short execution check. See [Colab instructions](docs/COLAB.md).
 
 ### What the data show
