@@ -1,0 +1,129 @@
+{
+  "project_url": "https://www.overleaf.com/project/6ad61683c0bbc25d3c18a031",
+  "pages": 14,
+  "errors": 0,
+  "warnings": 0,
+  "page_size_points": [
+    0.0,
+    0.0,
+    612.0,
+    792.0
+  ],
+  "all_fonts_embedded": true,
+  "fonts": {
+    "/SOPJIK+TeXGyreTermes-Italic": true,
+    "/PYMDNE+TeXGyreTermes-Regular": true,
+    "/PXFSNJ+CMMI9": true,
+    "/PKMWFM+MSBM7": true,
+    "/JSGRUK+CMBX10": true,
+    "/KWLTCA+CMR10": true,
+    "/HKSPAY+CMMI10": true,
+    "/NRRAUC+CMSY10": true,
+    "/OVPENQ+TeXGyreTermes-Bold": true,
+    "/PENLRC+TeXGyreTermes-BoldItalic": true,
+    "/CGTGIN+MSBM10": true,
+    "/XPBGWR+CMMIB10": true,
+    "/DWOTBW+CMSY7": true,
+    "/CUBGNB+CMR8": true,
+    "/VMJRAP+CMMI8": true,
+    "/THVOVL+CMSY8": true,
+    "/FSCSLE+CMR6": true,
+    "/ZKFCTC+CMBX7": true,
+    "/NODMBC+CMEX10": true,
+    "/KWPMGV+CMR7": true,
+    "/BGYSAN+CMMI7": true,
+    "/PFMLMT+CMSY5": true,
+    "/SVXNBT+TermesFigure-Regular": true,
+    "/ECFHAS+STIXGeneral-Regular": true,
+    "/DIUOYU+STIXGeneral-Italic": true,
+    "/BLSOTY+STIXNonUnicode-Italic": true,
+    "/GLORLD+MSAM10": true,
+    "/ZWSNUN+CMMI5": true,
+    "/EPLKQV+CMR5": true,
+    "/HDTKCD+TermesFigure-Regular": true,
+    "/CVHKII+STIXGeneral-Italic": true,
+    "/LNEITJ+CMMI6": true,
+    "/BYBOLE+TermesFigure-Regular": true,
+    "/DXPHFN+STIXGeneral-Italic": true,
+    "/FOKWBI+STIXGeneral-Regular": true,
+    "/EJUVLF+TermesFigure-Regular": true,
+    "/FAPZZR+TermesFigure-Regular": true
+  },
+  "abstract_words": 181,
+  "keyword_count": 5,
+  "comparison": [
+    {
+      "page": 1,
+      "pixel_identical": true
+    },
+    {
+      "page": 2,
+      "pixel_identical": true
+    },
+    {
+      "page": 3,
+      "pixel_identical": true
+    },
+    {
+      "page": 4,
+      "pixel_identical": true
+    },
+    {
+      "page": 5,
+      "pixel_identical": true
+    },
+    {
+      "page": 6,
+      "pixel_identical": true
+    },
+    {
+      "page": 7,
+      "pixel_identical": true
+    },
+    {
+      "page": 8,
+      "pixel_identical": true
+    },
+    {
+      "page": 9,
+      "pixel_identical": true
+    },
+    {
+      "page": 10,
+      "pixel_identical": true
+    },
+    {
+      "page": 11,
+      "pixel_identical": true
+    },
+    {
+      "page": 12,
+      "pixel_identical": true
+    },
+    {
+      "page": 13,
+      "pixel_identical": true
+    },
+    {
+      "page": 14,
+      "pixel_identical": true
+    }
+  ],
+  "figure_pages": [
+    3,
+    5,
+    8,
+    10,
+    12
+  ],
+  "zip_sha256": "fda1970808a234f349c6e96b61305043be5d8962d8314b40858b3745605310a3",
+  "pdf_sha256": "a9edb1fa36ae5f41bc18586a553d1636dd7c4acb7c34c8ed94ecffeb7bff7907",
+  "validated_on": "2026-10-19",
+  "zip_filename": "Complex_Voronoi_Overleaf_1.0.2_Colab_Overleaf_Validated_2c3188e.zip",
+  "package_source_commit": "2c3188e635ad07b3cd2cd2709e5d4bc7fea5bf0b",
+  "comparison_method": "Poppler pdftoppm -scale-to 1200 -png; RGB pixels compared against the prior compiled Overleaf PDF with Pillow ImageChops.difference.",
+  "included_validation_directories": [
+    "reproducibility/validation/colab_v1.0.2",
+    "reproducibility/validation/overleaf_colab_validated_v1.0.2"
+  ]
+}

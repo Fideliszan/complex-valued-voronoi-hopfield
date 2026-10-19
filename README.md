@@ -15,7 +15,9 @@
 
 > **Research companion.** Reproduce the paper from source, inspect the trial-level results, or launch one of the four CPU notebooks below. No external dataset or GitHub credentials are needed.
 
-**Validated in Overleaf (19 October 2026):** the preceding Colab-validated package compiled to 14 pages with **0 errors and 0 warnings**. The final ZIP linked above adds the Overleaf validation records; its manuscript and figure files are byte-identical to that compiled package. All five figures were preserved; all 14 rendered pages match the previous validated PDF. [Open the validated project](https://www.overleaf.com/project/6ad60897f64e207c3401375d) · [Verification record](validation/overleaf_colab_validated_v1.0.2/README.md).
+**Final ZIP verified directly in Overleaf (19 October 2026):** 14 pages, **0 errors and 0 warnings**, all fonts embedded, both Colab and Overleaf validation folders included. All five figures are preserved and all 14 rendered pages match the previous validated PDF. [Open the final identified project](https://www.overleaf.com/project/6ad61683c0bbc25d3c18a031) · [Final verification record](validation/overleaf_final_v1.0.2/README.md).
+
+**For TNNLS double-anonymous review:** use the separate [anonymous manuscript ZIP](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_TNNLS_Anonymous_Review_1.0.2.zip) or [anonymous Overleaf project](https://www.overleaf.com/project/6ad61772c0bbc25d3c1940b3). It also compiles to 14 pages with 0 errors and 0 warnings. Keep the identified reproducibility archive separate from review attachments. [TNNLS format review, page limits and author requirements](docs/TNNLS_FINAL_REVIEW.md).
 
 ## Overview
 

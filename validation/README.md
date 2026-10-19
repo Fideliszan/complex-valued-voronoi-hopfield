@@ -5,3 +5,5 @@ This folder contains publication-run environments, per-coordinate energy audits,
 The [direct v1.0.2 Colab validation](colab_v1.0.2/README.md) records execution of all four public GitHub-linked notebooks, including their setup path, numerical comparisons, figure checks, and evidence limitations.
 
 The [Overleaf validation of the updated ZIP](overleaf_colab_validated_v1.0.2/README.md) records the new project link, successful compilation, preservation of all five figures, and inclusion of the Colab records.
+
+Final checks cover the [exact final identified ZIP](overleaf_final_v1.0.2/README.md) and the separate [anonymous TNNLS review copy](tnnls_anonymous_v1.0.2/README.md).

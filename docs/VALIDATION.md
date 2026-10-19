@@ -45,3 +45,7 @@ python reproduce_all.py --mode full --output runs/independent_full
 The consistency check verifies hashes, table regeneration, figure equality, citation keys, notebook structure, geometry, hosted numerical records, and quoted manuscript values. A fresh full run compares scientific quantities at absolute tolerance 1e-9; timestamps and hardware-dependent timings are excluded. The benchmark requires exact agreement of all tested activation decisions.
 
 The theorem concerns exact minimizers; the implementation has explicit floating-point tie tolerances. Experimental success is not a proof of universal recall. CI results indicate the tested software environments, not a guarantee for all future package versions or hosted runtimes.
+
+## Final release archive and anonymous review copy
+
+The [exact final identified ZIP](../validation/overleaf_final_v1.0.2/README.md) was subsequently imported and compiled in Overleaf, confirming both validation directories and all five figures. A separate [anonymous manuscript-only copy](../validation/tnnls_anonymous_v1.0.2/README.md) also compiled with zero errors and warnings. Both PDFs have 14 pages. See the [TNNLS format review](TNNLS_FINAL_REVIEW.md) for submission-specific requirements.

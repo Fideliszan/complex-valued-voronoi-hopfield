@@ -1,0 +1,20 @@
+{
+  "project_url": "https://www.overleaf.com/project/6ad61772c0bbc25d3c1940b3",
+  "pages": 14,
+  "errors": 0,
+  "warnings": 0,
+  "author_metadata_empty": true,
+  "identifying_companion_and_email_strings_absent": true,
+  "pdf_sha256": "2bdf7195ce0d8a0227e332398296e569d1944e9080b5ab678f6412c41bae9f21",
+  "zip_sha256": "ace6c8ccd9e2be65d0247ec38ce33d7948146fd962b4a5f2555ffb61fa23a109",
+  "figure_pages": [
+    3,
+    5,
+    8,
+    10,
+    12
+  ],
+  "visual_review": "All 14 rendered pages reviewed; five figures present, with no visible clipping or overlap.",
+  "validated_on": "2026-10-19",
+  "figure_and_table_source_bytes_unchanged": true
+}
