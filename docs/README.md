@@ -14,3 +14,5 @@
 10. [Environment](ENVIRONMENT.md): dependencies and numerical environment.
 
 11. [Reference notes](REFERENCE_NOTES.md): source attribution and bibliographic corrections.
+
+12. [Layout review](LAYOUT_REVIEW.md): IEEE format, figure typography, and obsolete-content checks.

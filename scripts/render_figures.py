@@ -18,11 +18,14 @@ PALETTE=['#2864A0','#16877A','#8F6593','#CB701B']
 MARKERS={'classic':'s','voronoi':'o'}
 
 def style():
-    sns.set_theme(context='paper',style='whitegrid',font='DejaVu Sans',rc={
+    from figure_typography import configure
+    configure()
+    sns.set_theme(context='paper',style='whitegrid',font='Termes Figure',rc={
         'axes.spines.top':False,'axes.spines.right':False,'axes.edgecolor':'#717984',
         'grid.color':'#E6EAF0','grid.linewidth':.55,'axes.labelcolor':'#263440',
         'text.color':'#263440','xtick.color':'#52606C','ytick.color':'#52606C',
-        'font.size':10,'axes.labelsize':10,'axes.titlesize':11,'legend.fontsize':9,
+        'font.weight':'normal','axes.titleweight':'normal','axes.labelweight':'normal',
+        'mathtext.fontset':'stix','font.size':10,'axes.labelsize':10,'axes.titlesize':11,'legend.fontsize':9,
         'pdf.fonttype':42,'ps.fonttype':42,'svg.fonttype':'none'})
 
 def save(fig,name,out):
@@ -58,7 +61,7 @@ def render(data,out):
             ax.fill_between(x,y-sd,y+sd,color=COLORS[rule],alpha=.12,lw=0)
             ax.plot(x,y,color=COLORS[rule],marker=MARKERS[rule],markevery=8,ms=4,lw=1.7,ls='-' if rule=='classic' else '--',label='Classical' if rule=='classic' else 'Voronoi')
         ax.set(xlabel='Asynchronous sweeps',ylabel=label,xlim=(0,80))
-        ax.set_title(f'({chr(97+panel)})',loc='left',weight='bold')
+        ax.set_title(f'({chr(97+panel)})',loc='left',weight='normal')
     axes[0,0].legend(frameon=False,loc='upper right')
     save(fig,'saturation_diagnostics',out)
 
@@ -102,7 +105,7 @@ def render(data,out):
        geom_line(size=.75)+geom_point(size=2.1)+facet_grid('corruption_kind ~ alphabet',scales='free_x')+
        scale_color_manual(values={'Classical':COLORS['classic'],'Voronoi':COLORS['voronoi']})+
        scale_shape_manual(values={'Classical':'s','Voronoi':'o'})+
-       theme_minimal(base_size=10)+theme(figure_size=(10,4.7),legend_position='bottom',text=element_text(family='DejaVu Sans'))+
+       theme_minimal(base_size=10)+theme(figure_size=(10,4.7),legend_position='bottom',text=element_text(family='Termes Figure'))+
        labs(x='Nominal corruption level',y='Mean symbol error rate',color='',shape=''))
     for ext in ['pdf','svg','png']:p.save(out/f'recall_summary.{ext}',dpi=600,verbose=False)
     from render_cost import render as render_cost

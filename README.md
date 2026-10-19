@@ -9,7 +9,7 @@
 
 [Overview](#overview) · [Getting Started](#getting-started) · [Usage](#usage) · [Metrics](#metrics) · [Project Structure](#project-structure) · [Citation](#citation) · [License](#license)
 
-[Read the manuscript](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.1/Complex_Voronoi_Manuscript_1.0.1.pdf) · [Download the Overleaf project](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.1/Complex_Voronoi_Overleaf_1.0.1.zip) · [Browse the documentation](docs/README.md)
+[Read the manuscript](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Manuscript_1.0.2.pdf) · [Download the Overleaf project](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Overleaf_1.0.2.zip) · [Browse the documentation](docs/README.md)
 
 > **Research companion.** Reproduce the paper from source, inspect the trial-level results, or launch one of the four CPU notebooks below. No external dataset or GitHub credentials are needed.
 
@@ -95,10 +95,10 @@ Run commands from the repository root. Choose a new output directory; existing r
 
 | Notebook | What it does | Launch |
 |---|---|---|
-| Geometry and paper figures | Rebuilds all five figures from the publication data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.1/colab/00_geometry.ipynb) |
-| Saturation | Runs the paired energy and magnitude study | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.1/colab/01_saturation.ipynb) |
-| HSV recall | Runs recall under symbol and HSV corruption | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.1/colab/02_hsv_recall.ipynb) |
-| Activation cost | Benchmarks four alphabet cardinalities with exact decision checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.1/colab/03_activation_cost.ipynb) |
+| Geometry and paper figures | Rebuilds all five figures from the publication data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/00_geometry.ipynb) |
+| Saturation | Runs the paired energy and magnitude study | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/01_saturation.ipynb) |
+| HSV recall | Runs recall under symbol and HSV corruption | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/02_hsv_recall.ipynb) |
+| Activation cost | Benchmarks four alphabet cardinalities with exact decision checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/03_activation_cost.ipynb) |
 
 Select **Runtime → Run all**. Each notebook downloads the tagged public source, defaults to `MODE = "full"`, records its environment, and exports its results. Use `"smoke"` for a short execution check. See [Colab instructions](docs/COLAB.md).
 
@@ -155,8 +155,10 @@ Explicit ordered coordinates in `configs/ordered_alphabets.json` prevent platfor
 
 ## Citation
 
-Use [CITATION.cff](CITATION.cff) or GitHub's **Cite this repository** button. Cite version **v1.0.1** and record the exact commit and execution configuration. The paper explicitly cites this public companion.
+Use [CITATION.cff](CITATION.cff) or GitHub's **Cite this repository** button. Cite version **v1.0.2** and record the exact commit and execution configuration. The paper explicitly cites this public companion.
 
 ## License
 
 Code and repository documentation: [MIT](LICENSE). Original synthetic data, generated tables, and figures: [CC BY 4.0](LICENSE-DATA.md). The manuscript in `paper/` is excluded from those grants and remains copyrighted by its authors. Third-party packages and publisher classes retain their own licenses.
+
+Figure fonts are distributed under their own [GUST Font License](assets/fonts/GUST-FONT-LICENSE.txt); see the [font derivation note](assets/fonts/DERIVATION.txt).

@@ -110,7 +110,7 @@ def geometry(ax, z, title, pair, compact=False, labels=None):
     ax.tick_params(length=3, width=.6, labelsize=8 if compact else 9, pad=3)
     ax.set_xlabel(r'$\mathrm{Re}(z)$', fontsize=9 if compact else 10, labelpad=3)
     ax.set_ylabel(r'$\mathrm{Im}(z)$', fontsize=9 if compact else 10, labelpad=3)
-    ax.set_title(title, fontsize=10 if compact else 11, pad=9, weight='bold')
+    ax.set_title(title, fontsize=10 if compact else 11, pad=9, weight='normal')
     for spine in ax.spines.values():
         spine.set_visible(True); spine.set_color('#9BA6AF'); spine.set_linewidth(.6)
     return polygons, bisector_segment(z, *pair, active=True)

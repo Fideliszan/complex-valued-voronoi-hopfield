@@ -1,0 +1,30 @@
+{
+  "font": "Termes Figure (TeX Gyre Termes outlines)",
+  "weight": "regular",
+  "figures": {
+    "activation_scaling.pdf": [
+      "/FAPZZR+TermesFigure-Regular"
+    ],
+    "constellations.pdf": [
+      "/BLSOTY+STIXNonUnicode-Italic",
+      "/CVHKII+STIXGeneral-Italic",
+      "/ECFHAS+STIXGeneral-Regular",
+      "/HDTKCD+TermesFigure-Regular"
+    ],
+    "generic_voronoi.pdf": [
+      "/BLSOTY+STIXNonUnicode-Italic",
+      "/DIUOYU+STIXGeneral-Italic",
+      "/ECFHAS+STIXGeneral-Regular",
+      "/SVXNBT+TermesFigure-Regular"
+    ],
+    "hsv_recall.pdf": [
+      "/EJUVLF+TermesFigure-Regular"
+    ],
+    "saturation_diagnostics.pdf": [
+      "/BYBOLE+TermesFigure-Regular",
+      "/DXPHFN+STIXGeneral-Italic",
+      "/FOKWBI+STIXGeneral-Regular"
+    ]
+  },
+  "bibtex_errors": 0
+}

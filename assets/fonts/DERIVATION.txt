@@ -1,0 +1,1 @@
+Termes Figure is a renamed TrueType conversion of TeX Gyre Termes regular and italic. Glyph outlines are converted from cubic to quadratic curves at maximum error 0.5 font units for portable PDF embedding. Original OTF files and their GUST license are included. No design changes were made. The conversion script is scripts/convert_figure_fonts.py.

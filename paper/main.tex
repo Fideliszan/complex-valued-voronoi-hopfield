@@ -1,8 +1,9 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[10pt,journal,letterpaper]{IEEEtran}
 
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{tgtermes}
 
 
 \usepackage{microtype}
@@ -68,7 +69,7 @@ Complex-valued Hopfield neural networks (CV-HNNs) usually rely on phase-only or 
 
 \begin{IEEEkeywords}
 Complex-valued Hopfield networks, magnitude saturation bias, Voronoi projection, 
-inertial energy, multi-amplitude alphabets, stability analysis.
+inertial energy, multi-amplitude alphabets.
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -195,6 +196,7 @@ alphabet size, or number of symbols.
 \end{definition}
 
 \begin{definition}[Maximum modulus and saturation boundary]
+\label{def:maximum_modulus}
 The \textbf{maximum modulus} of a state alphabet is
 \begin{equation}
     R_{\max} = \max_{s \in \mathcal{S}} |s|.
@@ -228,15 +230,8 @@ the set $\bigcup_{s\neq s'} V(s)\cap V(s')$.
 
 The Voronoi cell $V(s)$ is a closed convex polygon (or polyhedral region) containing exactly those points of $\mathbb{C}$ whose distance to $s$ is no greater than their distance to any other state. Distinct cells can intersect on their boundaries; the deterministic tie rule below resolves these shared points.
 
-For distinct symbols $s,s'$, their perpendicular bisector is
-\[
-\ell_{s,s'}=\bigl\{z\in\mathbb{C}:
-2\operatorname{Re}\bigl(\overline{s'-s}\,z\bigr)=|s'|^2-|s|^2\bigr\}.
-\]
-The shared boundary $V(s)\cap V(s')$ is contained in $\ell_{s,s'}$;
-equidistance alone does not make the entire bisector a Voronoi boundary.
-Figure~\ref{fig:voronoi_generic} distinguishes these objects for a sparse
-illustrative alphabet and identifies its maximum-modulus symbols.
+Figure~\ref{fig:voronoi_generic} illustrates the cells and their boundaries
+for a sparse alphabet, together with its maximum-modulus symbols.
 
 In the interior of a Voronoi cell, the proposed alphabet-dependent activation $\mathcal{D}_{\mathcal{S}}$ selects its generator. On shared boundaries, the selection also depends on the current state and the tie rule. This partition serves as the geometric counterpart to the inertial penalty $-\tfrac12|s|^2$ derived in Theorem~\ref{thm:stability}: instead of solely maximizing the projection $\operatorname{Re}(\overline{s}v_k)$, the dynamics selects the Euclidean nearest neighbor, thereby suppressing the drift toward the amplitude saturation boundary.
 
@@ -703,7 +698,7 @@ inertial energy $E_r(t)$, the normalized squared norm
 \end{equation}
 where $N$ is the number of neurons introduced in Section~\ref{sec:bias}
 and $R_{\max}=\max_{s\in\mathcal{S}}|s|$ is the maximum symbol modulus
-from Definition~2 (equal to one after normalization). We also record
+from Definition~\ref{def:maximum_modulus} (equal to one after normalization). We also record
 the boundary occupation rate, defined as the fraction of neurons located on
 the amplitude saturation boundary,
 \begin{equation}
@@ -1001,19 +996,20 @@ by the proposed activation: for an arbitrary finite alphabet, the nearest
 Voronoi center must in principle be found from the set $\mathcal{S}$. The
 mathematical decision remains
 \begin{equation}
-    \mathcal{D}_{\mathcal{S}}(z)
-    =
-    \underset{s\in\mathcal{S}}{\arg\min}\, |z-s|^2
+    \mathcal{D}_{\mathcal{S}}(z;s_0)
+    \in \Omega_{\mathcal{S}}(z)
+    = \underset{s\in\mathcal{S}}{\arg\min}\, |z-s|^2
 \label{eq:exp3_exact_activation}
 \end{equation}
-and the experiment compares exact computational organizations of this same
-nearest-neighbor rule.
+with the current-state retention and deterministic tie rule defined in
+Section~\ref{sec:voronoi}. The experiment compares exact implementations of
+this same single-valued decision, including its behavior on shared boundaries.
 
 Four activation procedures are considered. The first is the direct exhaustive
 Euclidean search,
 \begin{equation}
-    \mathcal{D}_{\mathrm{dist}}(z)
-    =
+    \mathcal{D}_{\mathrm{dist}}(z;s_0)
+    \in
     \underset{s\in\mathcal{S}}{\arg\min}
     \left[
     (\operatorname{Re}z-\operatorname{Re}s)^2
@@ -1024,8 +1020,8 @@ Euclidean search,
 This method is universal and exact, but it performs a linear scan over the
 alphabet. The second is the equivalent exhaustive inertial-score search,
 \begin{equation}
-    \mathcal{D}_{\mathrm{score}}(z)
-    =
+    \mathcal{D}_{\mathrm{score}}(z;s_0)
+    \in
     \underset{s\in\mathcal{S}}{\arg\max}
     \left[
     \operatorname{Re}(\overline{s}z)-\frac{|s|^2}{2}
@@ -1193,7 +1189,7 @@ coordinates, coordinate-level energy audits, figure generators, and four
 Google Colab notebooks are publicly available in the companion
 repository~\cite{castro2026complexsoftware}:
 \url{https://github.com/Fideliszan/complex-valued-voronoi-hopfield}.
-Version~1.0.1 identifies the computational companion to this manuscript.
+Version~1.0.2 identifies the computational companion to this manuscript.
 The complete source package distributed with the manuscript also contains
 the companion. The notebooks download the public source and run the same
 experimental protocols without requiring GitHub credentials.
@@ -1204,8 +1200,9 @@ An additional full execution of the computational protocols on Google Colab
 reproduced all saturation trajectories and all recall outcomes, symbol
 errors, and stopping counts. Differences in recall energies were below
 $4\times10^{-13}$. The coordinate-energy checks passed, and all tested
-activation decisions agreed with exhaustive search. All five manuscript
-figures were also regenerated there. The companion preserves the raw
+activation decisions agreed with exhaustive search. The numerical inputs to the five manuscript figures were also checked
+there. The current figure typography was regenerated locally from those
+validated inputs. The companion preserves the raw
 hosted measurements, numerical environments, and comparison checks
 separately from the publication-host timing data.
 

@@ -20,6 +20,7 @@ def main():
                 assert p.read_text()==(ROOT/'tables'/p.name).read_text(),p.name
                 assert p.read_text()==(ROOT/'paper/Tables'/p.name).read_text(),p.name
     tex=(ROOT/'paper/main.tex').read_text(encoding='utf8');bib=(ROOT/'paper/references.bib').read_text(encoding='utf8')
+    assert not re.search(r'(?m)^[ \t]*\w+\s*=\s*[^\n]*[^,\s]\s*\n[ \t]*\w+\s*=',bib), 'Missing BibTeX field separator'
     known=set(re.findall(r'@\w+\s*\{\s*([^,]+),',bib))
     cited={k.strip() for group in re.findall(r'\\cite(?:\[[^]]*\])?\{([^}]+)\}',tex) for k in group.split(',')}
     assert not cited-known, cited-known

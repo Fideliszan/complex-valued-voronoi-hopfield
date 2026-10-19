@@ -11,6 +11,8 @@ PALETTE={'Distance':'#2864A0','Inertial score':'#CB701B','KD-tree':'#16877A','St
 
 
 def render(data,out):
+    from figure_typography import configure
+    configure()
     out=Path(out);out.mkdir(parents=True,exist_ok=True)
     data=Path(data)
     raw=pd.read_csv(data/'experiment3_raw_timings.csv')
@@ -31,12 +33,12 @@ def render(data,out):
         scale_shape_manual(values={'Distance':'o','Inertial score':'s','KD-tree':'^','Structured':'D'})+
         scale_linetype_manual(values={'Distance':'solid','Inertial score':'dashed','KD-tree':'dashdot','Structured':'dotted'})+
         theme_minimal(base_size=10)+theme(figure_size=(7.4,4.9),legend_position='bottom',
-            text=element_text(family='DejaVu Sans',color='#263440'),axis_text_x=element_text(size=8),
+            text=element_text(family='Termes Figure',color='#263440'),axis_text_x=element_text(size=8),
             axis_text_y=element_text(size=8),axis_line=element_line(color='#52606C',size=.5),
             axis_ticks=element_line(color='#52606C',size=.4),axis_ticks_minor=element_blank(),
             panel_spacing_x=.04,panel_spacing_y=.055,panel_grid_minor=element_blank(),
             panel_grid_major=element_line(color='#E6EAF0',size=.4),
-            strip_text=element_text(weight='bold',size=9),legend_title=element_blank())+
+            strip_text=element_text(weight='normal',size=9),legend_title=element_blank())+
         labs(x='Alphabet cardinality |S|',y='Microseconds per query (batch average)',color='',shape='',linetype=''))
     for ext in ('pdf','svg','png'):
         plot.save(out/f'activation_scaling.{ext}',dpi=600,verbose=False)
