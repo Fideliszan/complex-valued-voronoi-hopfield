@@ -1,0 +1,270 @@
+{
+  "description": "Publication-host run records. Each key is the former standalone file; contents are unchanged.",
+  "saturation_execution.json": {
+    "stage": "saturation",
+    "mode": "full",
+    "engine": "independent",
+    "configuration": {
+      "RANDOM_SEED": 20260831,
+      "N": 100,
+      "N_RUNS": 100,
+      "MAX_SWEEPS": 80,
+      "DIAGONAL_VALUE": 0.0,
+      "COUPLING_SCALE": 1.0,
+      "INITIALIZATION_PROTOCOLS": [
+        "uniform",
+        "inner"
+      ],
+      "FIG_DPI": 300,
+      "TIE_ATOL": 1e-12,
+      "BOUNDARY_ATOL": 1e-10,
+      "MONOTONICITY_TOL": 1e-10
+    },
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "scipy": "1.18.1"
+    },
+    "blas_threads": 1,
+    "seconds": 75.38294489998952
+  },
+  "recall_execution.json": {
+    "stage": "recall",
+    "mode": "full",
+    "engine": "independent",
+    "configuration": {
+      "RANDOM_SEED": 20260901,
+      "IMAGE_SHAPE": [
+        24,
+        24
+      ],
+      "V0": 0.8,
+      "ALPHABETS_TO_RUN": [
+        "64-PSK",
+        "64-QAM",
+        "64-Polar",
+        "61-Hexagonal"
+      ],
+      "P_NOISE": 4,
+      "N_TRIALS_NOISE": 30,
+      "SYMBOL_NOISE_LEVELS": [
+        0.0,
+        0.05,
+        0.1,
+        0.2,
+        0.3
+      ],
+      "HSV_NOISE_LEVELS": [
+        0.0,
+        0.02,
+        0.05,
+        0.1,
+        0.15
+      ],
+      "P_LOAD_VALUES": [
+        1,
+        2,
+        4,
+        6
+      ],
+      "N_TRIALS_LOAD": 2,
+      "LOAD_CORRUPTION_KIND": "symbol",
+      "LOAD_NOISE_LEVEL": 0.1,
+      "MAX_SWEEPS": 80,
+      "TIE_ATOL": 1e-12,
+      "MONOTONICITY_TOL": 1e-09,
+      "PINV_RCOND": 1e-10,
+      "SAVE_FIGURES": true,
+      "SAVE_OPTIONAL_PLOTS": false,
+      "FIG_DPI": 300,
+      "IMAGE_UPSCALE": 10,
+      "VISUAL_ALPHABET": "64-QAM",
+      "VISUAL_P": 4,
+      "VISUAL_TARGET_MU": 0,
+      "VISUAL_CORRUPTION_KIND": "hsv",
+      "VISUAL_NOISE_LEVEL": 0.1,
+      "OVERWRITE_OUTPUT_DIR": true
+    },
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "scipy": "1.18.1"
+    },
+    "blas_threads": 1,
+    "seconds": 198.66508390000672
+  },
+  "activation_cost_execution.json": {
+    "stage": "activation_cost",
+    "mode": "full",
+    "engine": "independent",
+    "configuration": {
+      "SCIPY_AVAILABLE": true,
+      "SCIPY_IMPORT_ERROR": "",
+      "RANDOM_SEED": 20260901,
+      "FAMILIES": [
+        "PSK",
+        "QAM",
+        "Polar",
+        "Hexagonal"
+      ],
+      "CARDINALITIES": [
+        16,
+        64,
+        256,
+        1024
+      ],
+      "N_QUERY_UNIFORM": 20000,
+      "N_QUERY_FIELDS": 20000,
+      "N_REPEATS": 5,
+      "CHUNK_SIZE": 4096,
+      "IMAGE_SHAPE": [
+        24,
+        24
+      ],
+      "P_FIELDS": 4,
+      "FIELD_HSV_NOISE": 0.1,
+      "FIELD_SWEEPS": 3,
+      "MIN_FIELD_TRIALS": 10,
+      "PINV_RCOND": 1e-10,
+      "KD_WORKERS": 1,
+      "FIG_DPI": 300,
+      "SAVE_FIGURES": false,
+      "OVERWRITE_OUTPUT_DIR": true
+    },
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "packages": {
+      "numpy": "2.5.4",
+      "pandas": "3.0.6",
+      "scipy": "1.18.1"
+    },
+    "blas_threads": 1,
+    "seconds": 57.187114900007145
+  },
+  "benchmark_validation.json": {
+    "configurations": 120,
+    "timing_records": 600,
+    "cardinalities": [
+      16,
+      64,
+      256,
+      1024
+    ],
+    "distinct_queries": 640000,
+    "minimum_query_agreement": 1.0,
+    "boundary_decisions": 61380,
+    "boundary_disagreements": 0
+  },
+  "local_comparison.json": {
+    "experiment1_final_runs.csv": {
+      "reference_rows": 1600,
+      "new_rows": 1600,
+      "keys_match": true,
+      "max_absolute_difference": {
+        "rho": 0.0,
+        "boundary_fraction": 0.0,
+        "E_c": 0.0,
+        "E_r": 0.0,
+        "steps_to_convergence": 0.0,
+        "converged": 0.0
+      },
+      "matches_at_1e-9": true
+    },
+    "experiment2_noise_results.csv": {
+      "reference_rows": 2400,
+      "new_rows": 2400,
+      "keys_match": true,
+      "max_absolute_difference": {
+        "initial_SER": 0.0,
+        "SER": 0.0,
+        "exact_recovery": 0.0,
+        "radial_error": 0.0,
+        "sweeps": 0.0,
+        "rgb_psnr": 0.0,
+        "complex_similarity": 0.0,
+        "angular_error_cycles": 0.0,
+        "initial_E_c": 0.0,
+        "initial_E_r": 0.0,
+        "final_E_c": 0.0,
+        "final_E_r": 0.0,
+        "changed_updates": 0.0,
+        "attempted_updates": 0.0,
+        "converged": 0.0,
+        "lyapunov_sweep_violations": 0.0
+      },
+      "matches_at_1e-9": true
+    },
+    "experiment2_load_results.csv": {
+      "reference_rows": 64,
+      "new_rows": 64,
+      "keys_match": true,
+      "max_absolute_difference": {
+        "SER": 0.0,
+        "exact_recovery": 0.0,
+        "radial_error": 0.0,
+        "rgb_psnr": 0.0,
+        "sweeps": 0.0,
+        "changed_updates": 0.0,
+        "final_E_c": 0.0,
+        "final_E_r": 0.0
+      },
+      "matches_at_1e-9": true
+    },
+    "activation_cost": {
+      "rows": 600,
+      "minimum_agreement": 1.0,
+      "timings_expected_to_differ": true
+    },
+    "saturation_history": "129600 rows agree exactly after CSV parsing",
+    "geometry_source_data": {
+      "activation_scaling.csv": "matches at tolerance 1e-12",
+      "geometry_alphabets.csv": "matches at tolerance 1e-12",
+      "irregular_symbols.csv": "matches at tolerance 1e-12",
+      "paper_visual_metrics.csv": "matches at tolerance 1e-12",
+      "recall_plot.csv": "matches at tolerance 1e-12",
+      "saturation_plot.csv": "matches at tolerance 1e-12"
+    },
+    "coordinate_audits": {
+      "saturation": {
+        "implementation": "independent equation-based kernels",
+        "trajectories": 1600,
+        "changed_updates": 464509,
+        "coordinate_energy_increases": 0,
+        "nonnegative_energy_changes": 0,
+        "terminal_rule_violations": 0,
+        "max_field_residual": 7.11198375584851e-15,
+        "max_energy_accumulation_residual": 1.4921397450962104e-13
+      },
+      "recall": {
+        "implementation": "independent equation-based kernels",
+        "trajectories": 2466,
+        "changed_updates": 1122553,
+        "coordinate_energy_increases": 0,
+        "nonnegative_energy_changes": 0,
+        "terminal_rule_violations": 0,
+        "max_field_residual": 1.820767875900462e-14,
+        "max_energy_accumulation_residual": 7.389644451905042e-13
+      }
+    },
+    "boundary_decisions": {
+      "tested": 61380,
+      "disagreements": 0
+    },
+    "environment": "local full notebook execution",
+    "source_files_sha256": {
+      "src/cvhnn/__init__.py": "1e50c27fbff0b7db4c8317ee7fcef6293b91b07daa6dfdb264d5395f65d9d981",
+      "src/cvhnn/activation_cost.py": "ea78678e6c565d0076e5528b801d82ac81993fe1df3753d02f214de4d0a673d4",
+      "src/cvhnn/independent.py": "708845f5a7fb90e9968d0255c028d4bf117cd6ae373fe9f38a0ad110ea0e31dd",
+      "src/cvhnn/independent_adapter.py": "6ab1d489de6ae2f294370cca4a6beb26f4a0f0558465a45be0bd69e3daef3815",
+      "src/cvhnn/independent_benchmark.py": "8cbc465043c344f27ba1e3dccbfd26adc64e173dce12961435b2ff1a6229ddad",
+      "src/cvhnn/independent_search.py": "5f349b404517fa54cd4b4bbbbeb63f0ef01004544f44e8fb17b40f5a5c642cd1",
+      "src/cvhnn/ordered_alphabets.py": "bc1f93007acc3356cb87fa7e2396e6e6f13c9ef51af1a494268d5ae4d67766b3",
+      "src/cvhnn/recall.py": "51cc05555919fe8a8f7fe8247fa66169c2a720675cf1b870435c602657e7e465",
+      "src/cvhnn/saturation.py": "bb4aabe78079494f9160a228af31f0c94fe869b5831782f8ecd65fca22b8c2ae"
+    }
+  }
+}

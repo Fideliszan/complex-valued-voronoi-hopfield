@@ -44,13 +44,13 @@ from __future__ import annotations
 import math
 import shutil
 import time
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Sequence, Tuple
+from typing import Any
 
 import numpy as np
 import pandas as pd
-
 
 # =========================
 # User-facing configuration
@@ -87,7 +87,7 @@ MONOTONICITY_TOL = 1e-9
 PINV_RCOND = 1e-10
 
 # Visual output.
-SAVE_FIGURES = True
+MAKE_FIGURES = True
 SAVE_OPTIONAL_PLOTS = False
 FIG_DPI = 300
 IMAGE_UPSCALE = 10
@@ -136,7 +136,7 @@ def make_qam(side: int) -> np.ndarray:
 def make_polar(n_radii: int, n_phases: int) -> np.ndarray:
     radii = np.linspace(1.0 / n_radii, 1.0, n_radii)
     phases = 2 * np.pi * np.arange(n_phases) / n_phases
-    points: List[complex] = []
+    points: list[complex] = []
     for radius in radii:
         points.extend(radius * np.exp(1j * phases))
     return normalize_alphabet(np.array(points, dtype=np.complex128))
@@ -145,12 +145,12 @@ def make_polar(n_radii: int, n_phases: int) -> np.ndarray:
 def make_hexagonal(m: int, search_radius: int = 6) -> np.ndarray:
     """Return the m closest points from a finite Eisenstein lattice patch."""
     omega = np.exp(1j * np.pi / 3)
-    points: List[complex] = []
+    points: list[complex] = []
     for a in range(-search_radius, search_radius + 1):
         for b in range(-search_radius, search_radius + 1):
             points.append(a + b * omega)
 
-    unique: Dict[Tuple[float, float], complex] = {}
+    unique: dict[tuple[float, float], complex] = {}
     for z in points:
         key = (round(float(np.real(z)), 12), round(float(np.imag(z)), 12))
         unique[key] = z
@@ -160,13 +160,14 @@ def make_hexagonal(m: int, search_radius: int = 6) -> np.ndarray:
     return normalize_alphabet(patch[order[:m]])
 
 
-def build_alphabets() -> Dict[str, np.ndarray]:
+def build_alphabets() -> dict[str, np.ndarray]:
     """Load published symbol coordinates and order, independent of libm sorting."""
     from .ordered_alphabets import load_group
+
     return load_group("recall")
 
 
-def generate_alphabets() -> Dict[str, np.ndarray]:
+def generate_alphabets() -> dict[str, np.ndarray]:
     return {
         "16-PSK": make_psk(16),
         "16-QAM": make_qam(4),
@@ -179,7 +180,7 @@ def generate_alphabets() -> Dict[str, np.ndarray]:
     }
 
 
-def alphabet_summary_row(name: str, alphabet: np.ndarray) -> Dict[str, Any]:
+def alphabet_summary_row(name: str, alphabet: np.ndarray) -> dict[str, Any]:
     radii = np.abs(alphabet)
     rounded_radii = np.unique(np.round(radii, 6))
     rmax = float(np.max(radii))
@@ -209,7 +210,9 @@ def hsv_fields_to_complex(hue: np.ndarray, saturation: np.ndarray, rmax: float =
     return rmax * sigma * np.exp(1j * theta)
 
 
-def complex_to_hsv_fields(z: np.ndarray, rmax: float = 1.0, v0: float = V0) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+def complex_to_hsv_fields(
+    z: np.ndarray, rmax: float = 1.0, v0: float = V0
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Decode a complex state into HSV fields for visualization."""
     z = np.asarray(z, dtype=np.complex128)
     saturation = np.clip(np.abs(z) / max(rmax, 1e-12), 0.0, 1.0)
@@ -253,7 +256,7 @@ def hsv_to_rgb(hue: np.ndarray, saturation: np.ndarray, value: np.ndarray | floa
 def state_indices_to_rgb(
     indices: np.ndarray,
     alphabet: np.ndarray,
-    image_shape: Tuple[int, int],
+    image_shape: tuple[int, int],
     rmax: float = 1.0,
     v0: float = V0,
 ) -> np.ndarray:
@@ -269,9 +272,9 @@ def state_indices_to_rgb(
 
 def generate_synthetic_hsv_memories(
     num_memories: int,
-    image_shape: Tuple[int, int],
+    image_shape: tuple[int, int],
     seed: int = RANDOM_SEED,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray]:
     """Generate deterministic HSV fields that exercise phase and magnitude."""
     height, width = image_shape
     y = np.linspace(-1.0, 1.0, height)
@@ -302,13 +305,7 @@ def generate_synthetic_hsv_memories(
         blob = np.exp(-((xx - cx) ** 2 + (yy - cy) ** 2) / (2.0 * blob_width**2))
         diagonal = 0.5 + 0.5 * np.sin((mu + 1) * np.pi * (xx + yy))
 
-        raw_saturation = (
-            0.32 * waves
-            + 0.25 * rings
-            + 0.25 * (1.0 - radius_norm)
-            + 0.30 * blob
-            + 0.12 * diagonal
-        )
+        raw_saturation = 0.32 * waves + 0.25 * rings + 0.25 * (1.0 - radius_norm) + 0.30 * blob + 0.12 * diagonal
         raw_saturation -= raw_saturation.min()
         raw_saturation /= raw_saturation.max() + 1e-12
         saturation = 0.04 + 0.96 * raw_saturation
@@ -320,7 +317,7 @@ def generate_synthetic_hsv_memories(
 
 
 def save_memory_bank_overview(hue_bank: np.ndarray, saturation_bank: np.ndarray, out_path: Path) -> None:
-    if not SAVE_FIGURES:
+    if not MAKE_FIGURES:
         return
 
     import matplotlib.pyplot as plt
@@ -362,7 +359,7 @@ def quantize_hsv_memories(
     saturation_bank: np.ndarray,
     alphabet: np.ndarray,
     p: int,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray]:
     """Return memory indices and memory values with shapes (P, N)."""
     rmax = float(np.max(np.abs(alphabet)))
     z = hsv_fields_to_complex(hue_bank[:p], saturation_bank[:p], rmax=rmax)
@@ -371,7 +368,7 @@ def quantize_hsv_memories(
     return indices, values
 
 
-def build_projection_weights(memory_values: np.ndarray) -> Tuple[np.ndarray, Dict[str, Any]]:
+def build_projection_weights(memory_values: np.ndarray) -> tuple[np.ndarray, dict[str, Any]]:
     """Construct W = X (X^* X)^dagger X^* from memory values of shape (P, N)."""
     x_matrix = memory_values.T.astype(np.complex128)  # N x P
     gram = x_matrix.conj().T @ x_matrix
@@ -411,7 +408,7 @@ class DynamicsResult:
     final_E_r: float
 
 
-def energies(state: np.ndarray, w: np.ndarray) -> Tuple[float, float]:
+def energies(state: np.ndarray, w: np.ndarray) -> tuple[float, float]:
     """Return classical energy E_c and inertial energy E_r."""
     quadratic = float(np.real(np.vdot(state, w @ state)))
     e_c = -0.5 * quadratic
@@ -445,7 +442,7 @@ def voronoi_activation_index(local_field: complex, alphabet: np.ndarray, current
     return conservative_argmin(distances, current_idx)
 
 
-def make_schedule(n: int, max_sweeps: int, rng: np.random.Generator) -> List[np.ndarray]:
+def make_schedule(n: int, max_sweeps: int, rng: np.random.Generator) -> list[np.ndarray]:
     return [rng.permutation(n) for _ in range(max_sweeps)]
 
 
@@ -587,8 +584,8 @@ def compute_metrics(
     final_indices: np.ndarray,
     target_indices: np.ndarray,
     alphabet: np.ndarray,
-    image_shape: Tuple[int, int],
-) -> Dict[str, float]:
+    image_shape: tuple[int, int],
+) -> dict[str, float]:
     final_values = alphabet[final_indices]
     target_values = alphabet[target_indices]
     rmax = float(np.max(np.abs(alphabet)))
@@ -636,7 +633,7 @@ def paired_recall_trial(
     corruption_kind: str,
     noise_level: float,
     trial_seed: int,
-) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     memory_indices, memory_values = quantize_hsv_memories(hue_bank, saturation_bank, alphabet, p)
     w, weight_info = build_projection_weights(memory_values)
     n = memory_indices.shape[1]
@@ -657,7 +654,7 @@ def paired_recall_trial(
     initial_ser = float(np.mean(initial_indices != target_indices))
     schedule = make_schedule(n, MAX_SWEEPS, rng_schedule)
 
-    rows: List[Dict[str, Any]] = []
+    rows: list[dict[str, Any]] = []
     for rule in ("classic", "voronoi"):
         result = run_dynamics(alphabet, w, initial_indices, schedule, rule=rule, max_sweeps=MAX_SWEEPS)
         metrics = compute_metrics(result.final_indices, target_indices, alphabet, IMAGE_SHAPE)
@@ -703,12 +700,12 @@ def paired_recall_trial(
 
 
 def run_noise_experiment(
-    alphabets: Dict[str, np.ndarray],
+    alphabets: dict[str, np.ndarray],
     hue_bank: np.ndarray,
     saturation_bank: np.ndarray,
-) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    rows: List[Dict[str, Any]] = []
-    validation_rows: List[Dict[str, Any]] = []
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    rows: list[dict[str, Any]] = []
+    validation_rows: list[dict[str, Any]] = []
 
     print("[Experiment 2] Running noise curves...")
     for alphabet_name in ALPHABETS_TO_RUN:
@@ -720,7 +717,9 @@ def run_noise_experiment(
             for noise_level in noise_levels:
                 for trial in range(N_TRIALS_NOISE):
                     target_mu = trial % P_NOISE
-                    trial_seed = RANDOM_SEED + 1000 * hash_stable(alphabet_name) + 100 * int(round(1000 * noise_level)) + trial
+                    trial_seed = (
+                        RANDOM_SEED + 1000 * hash_stable(alphabet_name) + 100 * int(round(1000 * noise_level)) + trial
+                    )
                     trial_rows, weight_info = paired_recall_trial(
                         alphabet_name=alphabet_name,
                         alphabet=alphabet,
@@ -755,12 +754,12 @@ def run_noise_experiment(
 
 
 def run_load_experiment(
-    alphabets: Dict[str, np.ndarray],
+    alphabets: dict[str, np.ndarray],
     hue_bank: np.ndarray,
     saturation_bank: np.ndarray,
-) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    rows: List[Dict[str, Any]] = []
-    validation_rows: List[Dict[str, Any]] = []
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    rows: list[dict[str, Any]] = []
+    validation_rows: list[dict[str, Any]] = []
 
     print("[Experiment 2] Running load curves...")
     for alphabet_name in ALPHABETS_TO_RUN:
@@ -812,7 +811,7 @@ def hash_stable(text: str) -> int:
 # ====================
 
 
-def prepare_output_dirs() -> Tuple[Path, Path]:
+def prepare_output_dirs() -> tuple[Path, Path]:
     if OUTPUT_DIR.exists() and OVERWRITE_OUTPUT_DIR:
         raise FileExistsError(f"Output already exists: {OUTPUT_DIR}")
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -868,7 +867,7 @@ def write_report(
     validation_df: pd.DataFrame,
     elapsed_seconds: float,
 ) -> None:
-    lines: List[str] = []
+    lines: list[str] = []
     lines.append("Experiment 2: HSV-encoded associative recall")
     lines.append("=" * 55)
     lines.append("")
@@ -947,6 +946,7 @@ def write_report(
 def configure_matplotlib() -> None:
     import matplotlib.pyplot as plt
     import seaborn as sns
+
     sns.set_theme(style="whitegrid", context="paper", font="DejaVu Sans")
 
     plt.rcParams.update(
@@ -980,7 +980,7 @@ def plot_noise_metric(
     figures_dir: Path,
     filename_stem: str,
 ) -> None:
-    if not SAVE_FIGURES:
+    if not MAKE_FIGURES:
         return
 
     import matplotlib.pyplot as plt
@@ -1002,8 +1002,7 @@ def plot_noise_metric(
         for col_idx, corruption_kind in enumerate(corruption_order):
             ax = axes[row_idx, col_idx]
             subset = noise_summary[
-                (noise_summary["alphabet"] == alphabet_name)
-                & (noise_summary["corruption_kind"] == corruption_kind)
+                (noise_summary["alphabet"] == alphabet_name) & (noise_summary["corruption_kind"] == corruption_kind)
             ]
             for rule in ("classic", "voronoi"):
                 rule_df = subset[subset["rule"] == rule].sort_values("noise_level")
@@ -1012,7 +1011,14 @@ def plot_noise_metric(
                 x = rule_df["noise_level"].to_numpy(dtype=float)
                 y = rule_df[f"{metric}_mean"].to_numpy(dtype=float)
                 ystd = rule_df.get(f"{metric}_std", pd.Series(np.zeros_like(y))).to_numpy(dtype=float)
-                ax.plot(x, y, marker="s" if rule == "classic" else "o", linestyle="-" if rule == "classic" else "--", color=rule_colors[rule], label=rule_labels[rule])
+                ax.plot(
+                    x,
+                    y,
+                    marker="s" if rule == "classic" else "o",
+                    linestyle="-" if rule == "classic" else "--",
+                    color=rule_colors[rule],
+                    label=rule_labels[rule],
+                )
                 ax.fill_between(x, y - ystd, y + ystd, color=rule_colors[rule], alpha=0.12, linewidth=0)
 
             if row_idx == 0:
@@ -1032,7 +1038,7 @@ def plot_noise_metric(
 
 
 def plot_load_exact_recovery(load_summary: pd.DataFrame, figures_dir: Path) -> None:
-    if not SAVE_FIGURES:
+    if not MAKE_FIGURES:
         return
 
     import matplotlib.pyplot as plt
@@ -1091,13 +1097,13 @@ def save_rgb_image(path: Path, rgb: np.ndarray, upscale: int = IMAGE_UPSCALE) ->
 
 
 def make_visual_example(
-    alphabets: Dict[str, np.ndarray],
+    alphabets: dict[str, np.ndarray],
     hue_bank: np.ndarray,
     saturation_bank: np.ndarray,
     figures_dir: Path,
     images_dir: Path,
 ) -> None:
-    if not SAVE_FIGURES:
+    if not MAKE_FIGURES:
         return
 
     import matplotlib.pyplot as plt
@@ -1145,7 +1151,7 @@ def make_visual_example(
         (r"$\mathcal{D}_{\mathcal{S}}$", images["voronoi_recall"]),
     ]
     fig, axes = plt.subplots(1, 4, figsize=(8.4, 2.4))
-    for ax, (title, rgb) in zip(axes, panel_items):
+    for ax, (title, rgb) in zip(axes, panel_items, strict=True):
         ax.imshow(rgb, interpolation="nearest")
         ax.set_title(title)
         ax.axis("off")
@@ -1184,13 +1190,13 @@ def make_visual_example(
 def make_figures(
     noise_summary: pd.DataFrame,
     load_summary: pd.DataFrame,
-    alphabets: Dict[str, np.ndarray],
+    alphabets: dict[str, np.ndarray],
     hue_bank: np.ndarray,
     saturation_bank: np.ndarray,
     figures_dir: Path,
     images_dir: Path,
 ) -> None:
-    if not SAVE_FIGURES:
+    if not MAKE_FIGURES:
         return
 
     plot_noise_metric(noise_summary, "SER", "SER", figures_dir, "experiment2_noise_SER")
@@ -1220,9 +1226,7 @@ def main() -> None:
 
     alphabets = build_alphabets()
     selected_alphabets = {name: alphabets[name] for name in ALPHABETS_TO_RUN}
-    alphabet_df = pd.DataFrame(
-        [alphabet_summary_row(name, alphabet) for name, alphabet in selected_alphabets.items()]
-    )
+    alphabet_df = pd.DataFrame([alphabet_summary_row(name, alphabet) for name, alphabet in selected_alphabets.items()])
     save_dataframe(alphabet_df, OUTPUT_DIR / "experiment2_alphabet_summary")
 
     max_p = max(max(P_LOAD_VALUES), P_NOISE, VISUAL_P)
