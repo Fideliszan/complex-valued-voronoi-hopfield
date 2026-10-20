@@ -3,17 +3,25 @@ from pathlib import Path
 import nbformat as nb
 
 ROOT=Path(__file__).resolve().parents[1]
-setup='from pathlib import Path\nimport os, sys, subprocess, uuid, json\n\nREPOSITORY = "https://github.com/Fideliszan/complex-valued-voronoi-hopfield.git"\nREVISION = "v1.0.2"\ntry:\n    import google.colab\n    IN_COLAB = True\nexcept ImportError:\n    IN_COLAB = False\n\nif IN_COLAB:\n    ROOT = Path("/content") / ("complex_voronoi_" + uuid.uuid4().hex[:8])\n    subprocess.run(["git", "clone", "--quiet", "--depth", "1", "--branch", REVISION,\n                    REPOSITORY, str(ROOT)], check=True, capture_output=True, text=True)\nelse:\n    candidates = [Path.cwd(), *Path.cwd().parents]\n    ROOT = next((p for p in candidates if (p / "src/cvhnn").is_dir()), None)\n    if ROOT is None:\n        raise RuntimeError("Open this notebook from an extracted repository directory.")\nos.environ["MPLCONFIGDIR"] = str(ROOT / "runs/matplotlib")\nprint("Project:", ROOT.name)\nprint("Runtime:", "Google Colab" if IN_COLAB else "local")\nprint("Source:", REVISION if IN_COLAB else "local checkout")\n'
+# Tag cloned on Colab; update when a release containing these notebooks is tagged.
+REVISION='v1.0.2'
+settings='''# Global run settings: edit here only.
+MODE = "full"          # "full" = paper protocol, "smoke" = short execution check
+SAVE_DATA = True       # keep CSV / NPZ / JSON results after the run
+SAVE_FIGURES = True    # keep PNG / PDF figures after the run
+print("Mode:", MODE, "| save data:", SAVE_DATA, "| save figures:", SAVE_FIGURES)
+'''
+setup='from pathlib import Path\nimport os, sys, subprocess, uuid, json\n\nREPOSITORY = "https://github.com/Fideliszan/complex-valued-voronoi-hopfield.git"\nREVISION = "'+REVISION+'"\ntry:\n    import google.colab\n    IN_COLAB = True\nexcept ImportError:\n    IN_COLAB = False\n\nif IN_COLAB:\n    ROOT = Path("/content") / ("complex_voronoi_" + uuid.uuid4().hex[:8])\n    subprocess.run(["git", "clone", "--quiet", "--depth", "1", "--branch", REVISION,\n                    REPOSITORY, str(ROOT)], check=True, capture_output=True, text=True)\nelse:\n    candidates = [Path.cwd(), *Path.cwd().parents]\n    ROOT = next((p for p in candidates if (p / "src/cvhnn").is_dir()), None)\n    if ROOT is None:\n        raise RuntimeError("Open this notebook from an extracted repository directory.")\nos.environ["MPLCONFIGDIR"] = str(ROOT / "runs/matplotlib")\nprint("Project:", ROOT.name)\nprint("Runtime:", "Google Colab" if IN_COLAB else "local")\nprint("Source:", REVISION if IN_COLAB else "local checkout")\n'
 install='''if IN_COLAB:
     subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", str(ROOT / "requirements.txt")], check=True)
 print("Setup complete.")
 '''
 stages=[('00_geometry','Geometry and publication figures',None),('01_saturation','Magnitude saturation and energy','saturation'),('02_hsv_recall','HSV associative recall','recall'),('03_activation_cost','Exact activation cost','activation_cost')]
 for name,title,stage in stages:
-    n=nb.v4.new_notebook();cells=[nb.v4.new_markdown_cell(f'# {title}\n\nCompanion to *Voronoi-Based Activation Functions and Inertial Energy for Complex-Valued Hopfield Networks*.\n\n## Goal\nRun the same implementation as the paper with explicit inputs and outputs. The public setup downloads the tagged source without GitHub credentials. Full mode follows the paper protocol; smoke mode is an execution check. The final cell exports this run.'),nb.v4.new_markdown_cell('## Setup\nSelect a CPU runtime and run all cells in order. On Google Colab, setup clones the public release and installs its requirements. Locally, install requirements.txt and open the notebook from the extracted repository.'),nb.v4.new_code_cell(setup),nb.v4.new_code_cell(install),nb.v4.new_markdown_cell('## Configuration\nSmoke mode checks execution with fewer trials. Full mode uses the paper protocol. Existing output directories are never overwritten.'),nb.v4.new_code_cell('MODE = "full"\nOUTPUT = ROOT / "runs" / ("'+name+'_" + uuid.uuid4().hex[:8])\nprint("Mode:", MODE)')]
+    n=nb.v4.new_notebook();cells=[nb.v4.new_markdown_cell(f'# {title}\n\nCompanion to *Voronoi-Based Activation Functions and Inertial Energy for Complex-Valued Hopfield Networks*.\n\n## Goal\nRun the same implementation as the paper with explicit inputs and outputs. The public setup downloads the tagged source without GitHub credentials. Full mode follows the paper protocol; smoke mode is an execution check. The final cell keeps or discards this run according to the settings below.'),nb.v4.new_markdown_cell('## Run settings\nSmoke mode checks execution with fewer trials; full mode uses the paper protocol. `SAVE_DATA` and `SAVE_FIGURES` decide what remains in `runs/` after the notebook finishes. The checks below always run on the complete output; with both switches off, results are only shown in the notebook.'),nb.v4.new_code_cell(settings),nb.v4.new_markdown_cell('## Setup\nSelect a CPU runtime and run all cells in order. On Google Colab, setup clones the public release and installs its requirements. Locally, install requirements.txt and open the notebook from the extracted repository.'),nb.v4.new_code_cell(setup),nb.v4.new_code_cell(install),nb.v4.new_markdown_cell('## Output folder\nEach run gets a new folder under `runs/`; existing output directories are never overwritten.'),nb.v4.new_code_cell('OUTPUT = ROOT / "runs" / ("'+name+'_" + uuid.uuid4().hex[:8])\n# The run writes everything so the checks can read it; the save switches apply in the last cell.\nRUN_ENV = {**os.environ, "CVHNN_SAVE_DATA": "1", "CVHNN_SAVE_FIGURES": "1"}\nprint("Output:", OUTPUT.relative_to(ROOT))')]
     if stage:
         code=f'''command = [sys.executable, str(ROOT / "scripts/run_experiment.py"), "{stage}", "--mode", MODE, "--output", str(OUTPUT)]
-completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, env=RUN_ENV)
 print("Experiment completed successfully." if completed.returncode == 0 else completed.stdout[-1200:])
 if completed.returncode:
     print(completed.stderr[-3000:])
@@ -22,7 +30,7 @@ print("Execution record:", json.loads((OUTPUT / "execution.json").read_text())["
 '''
     else:
         code='''command = [sys.executable, str(ROOT / "scripts/render_figures.py"), "--data", str(ROOT / "data/paper"), "--output", str(OUTPUT)]
-completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, env=RUN_ENV)
 if completed.returncode:
     print(completed.stderr[-3000:])
     raise RuntimeError("Rendering failed.")
@@ -82,17 +90,34 @@ display(Image(filename=str(OUTPUT / "figures/activation_scaling.png"), width=100
         result='''from IPython.display import display, Image
 for name in ["generic_voronoi", "constellations", "saturation_diagnostics", "hsv_recall", "activation_scaling"]:
     display(Image(filename=str(OUTPUT / (name + ".png")), width=750))
-print("Vector PDF/SVG and 600 dpi PNG files are available in the output folder.")
+print("Vector PDF and 600 dpi PNG files are in the output folder until the save settings are applied.")
 '''
-    cells += [nb.v4.new_code_cell(result),nb.v4.new_markdown_cell('## Interpretation\nEnergy descent and target recovery answer different questions. Smoke results are execution checks, not paper estimates. Means and timings must be interpreted with the stated protocol; timing changes between machines are expected. For the full paper comparison, follow `docs/VALIDATION.md` and `docs/USAGE.md`.'),nb.v4.new_markdown_cell('## Save the outputs'),nb.v4.new_code_cell('''import shutil
-archive = shutil.make_archive(str(OUTPUT) + "_download", "zip", OUTPUT)
-if IN_COLAB:
-    from google.colab import files
-    shutil.copy2(archive, Path("/content") / Path(archive).name)
-    print("Output ZIP in the Files sidebar:", Path(archive).name)
-    files.download(archive)
+    cells += [nb.v4.new_code_cell(result),nb.v4.new_markdown_cell('## Interpretation\nEnergy descent and target recovery answer different questions. Smoke results are execution checks, not paper estimates. Means and timings must be interpreted with the stated protocol; timing changes between machines are expected. For the full paper comparison, follow `docs/VALIDATION.md` and `docs/USAGE.md`.'),nb.v4.new_markdown_cell('## Save or discard the outputs\nApplies `SAVE_DATA` and `SAVE_FIGURES`. Run records (`execution.json`, `notebook_runtime.json`) are kept with whatever is saved.'),nb.v4.new_code_cell('''import shutil
+# Same rule as cvhnn.settings.retain, inlined so the notebook also works with the tagged source.
+FIGURE_SUFFIXES = {".png", ".pdf", ".svg"}
+RECORDS = {"execution.json", "notebook_runtime.json"}
+sibling = OUTPUT.with_name(OUTPUT.name + ".zip")
+if not (SAVE_DATA and SAVE_FIGURES) and sibling.exists():
+    sibling.unlink()
+if not (SAVE_DATA or SAVE_FIGURES):
+    shutil.rmtree(OUTPUT, ignore_errors=True)
+    print("Nothing saved (SAVE_DATA = SAVE_FIGURES = False); the results are shown above.")
 else:
-    print("Saved:", Path(archive).name)
+    for path in sorted(OUTPUT.rglob("*"), reverse=True):
+        if path.is_file() and path.name not in RECORDS:
+            figure = path.suffix.lower() in FIGURE_SUFFIXES
+            if not (SAVE_FIGURES if figure else SAVE_DATA):
+                path.unlink()
+        elif path.is_dir() and not any(path.iterdir()):
+            path.rmdir()
+    archive = shutil.make_archive(str(OUTPUT) + "_download", "zip", OUTPUT)
+    if IN_COLAB:
+        from google.colab import files
+        shutil.copy2(archive, Path("/content") / Path(archive).name)
+        print("Output ZIP in the Files sidebar:", Path(archive).name)
+        files.download(archive)
+    else:
+        print("Saved:", OUTPUT.relative_to(ROOT), "and", Path(archive).name)
 ''')]
     
     for i, cell in enumerate(cells):

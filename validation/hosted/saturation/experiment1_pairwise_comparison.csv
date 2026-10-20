@@ -1,9 +1,0 @@
-init_protocol,alphabet,classic_minus_voronoi_final_rho,classic_minus_voronoi_final_boundary,classic_minus_voronoi_steps
-inner,16-PSK,0.0,0.0,0.0
-inner,16-Polar,0.4291687499999999,0.616,-1106.0
-inner,16-QAM,0.4004,0.6991,-955.0
-inner,19-Hexagonal,0.2911499999999999,0.5824,-592.0
-uniform,16-PSK,0.0,0.0,0.0
-uniform,16-Polar,0.43798124999999977,0.6244,-1036.0
-uniform,16-QAM,0.4019111111111111,0.7008,-825.0
-uniform,19-Hexagonal,0.2950750000000001,0.587,-574.0

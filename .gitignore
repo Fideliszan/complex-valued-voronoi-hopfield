@@ -12,3 +12,6 @@ runs/
 *.synctex.gz
 paper/main.pdf
 paper/main.bbl
+
+# Rewritten by scripts/verify_geometry.py on every check (platform-dependent last digits).
+validation/geometry_check.json

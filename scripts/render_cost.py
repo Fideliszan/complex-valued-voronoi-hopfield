@@ -40,7 +40,7 @@ def render(data,out):
             panel_grid_major=element_line(color='#E6EAF0',size=.4),
             strip_text=element_text(weight='normal',size=9),legend_title=element_blank())+
         labs(x='Alphabet cardinality |S|',y='Microseconds per query (batch average)',color='',shape='',linetype=''))
-    for ext in ('pdf','svg','png'):
+    for ext in ('pdf','png'):
         plot.save(out/f'activation_scaling.{ext}',dpi=600,verbose=False)
     return d
 

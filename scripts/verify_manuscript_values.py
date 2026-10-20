@@ -33,7 +33,8 @@ def verify():
             assert (tmp / "tables" / name).read_text() == (ROOT / "paper/Tables" / name).read_text(), name
 
     # Figure 3: every mean and sample standard deviation, not only endpoints.
-    history = pd.read_csv(HOSTED / "saturation/experiment1_trajectories.csv")
+    # Identical to the hosted history (see validation/hosted/saturation/hosted_comparison.json).
+    history = pd.read_csv(ROOT / "data/paper/experiment1_trajectories.csv.gz")
     subset = history.query('alphabet == "16-QAM" and init_protocol == "uniform"')
     expected = subset.groupby(["rule", "sweep"])[["E_c", "E_r", "rho", "boundary_fraction"]].agg(["mean", "std"]).reset_index()
     plotted = pd.read_csv(ROOT / "figures/source_data/saturation_plot.csv", header=[0, 1])

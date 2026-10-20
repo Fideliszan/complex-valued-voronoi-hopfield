@@ -3,7 +3,7 @@
 **Fidelis Zanetti de Castro · Marcos Eduardo Valle · João P. Papa · Rodolfo Anibal Lobo**
 
 [![Tests](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/actions/workflows/tests.yml/badge.svg)](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/actions/workflows/tests.yml)
-[![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13-2864A0)](docs/ENVIRONMENT.md)
+[![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13-2864A0)](docs/USAGE.md#environment)
 [![Code MIT](https://img.shields.io/badge/Code-MIT-16877A)](LICENSE)
 [![Data CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-8F6593)](LICENSE-DATA.md)
 
@@ -29,7 +29,7 @@ The classical rule maximizes the real inner product with the local field. On a m
 
 ![Four finite complex alphabets and their clipped Voronoi cells.](figures/constellations.png)
 
-*PSK, QAM, polar, and hexagonal alphabets. Filled points are alphabet symbols; hollow rings identify maximum-modulus symbols. Thin boundaries and muted fills distinguish adjacent Voronoi cells; the dotted circle shows the maximum radius. [Vector PDF](figures/constellations.pdf) · [Geometric interpretation](docs/OVERVIEW.md).*
+*PSK, QAM, polar, and hexagonal alphabets. Filled points are alphabet symbols; hollow rings identify maximum-modulus symbols. Thin boundaries and muted fills distinguish adjacent Voronoi cells; the dotted circle shows the maximum radius. [Vector PDF](figures/constellations.pdf) · [Geometric interpretation](docs/METHODS.md#model).*
 
 ### Contributions and limits
 
@@ -37,18 +37,17 @@ The classical rule maximizes the real inner product with the local field. On a m
 - Formulate a finite-alphabet Voronoi activation with conservative deterministic tie handling, and establish finite convergence under Hermitian weights with nonnegative diagonal and a fair asynchronous schedule.
 - Test the mechanism, HSV recall, and alternative exact nearest-symbol implementations in three separate experiments.
 
-Convergence does not guarantee recovery of the intended memory. The term “inertial” refers to the quadratic state penalty; the model is not a momentum-based second-order dynamics. The experiments use synthetic patterns and do not establish universal superiority over other associative memories. [Method and scope](docs/OVERVIEW.md).
+Convergence does not guarantee recovery of the intended memory. The term “inertial” refers to the quadratic state penalty; the model is not a momentum-based second-order dynamics. The experiments use synthetic patterns and do not establish universal superiority over other associative memories. [Method and scope](docs/METHODS.md#scope).
 
 ## Explore the evidence
 
 | I want to… | Start here |
 |---|---|
-| Understand the equations and assumptions | [Overview](docs/OVERVIEW.md) |
-| Browse figures and their source data | [Gallery](docs/GALLERY.md) |
-| Find the script behind a paper figure or table | [Paper map](docs/PAPER_MAP.md) |
-| Run one experiment or all experiments | [Usage](docs/USAGE.md), [experiment catalog](docs/EXPERIMENTS.md) |
-| Interpret errors, energies, and runtime | [Metrics](docs/METRICS.md) |
-| Check numerical reproducibility | [Theory-to-code audit](docs/METHODS_AUDIT.md), [validation](docs/VALIDATION.md) |
+| Understand the equations and assumptions | [Methods](docs/METHODS.md#model) |
+| Find the script behind a paper figure or table | [Paper map](docs/USAGE.md#paper-to-code-map) |
+| Run one experiment or all experiments | [Usage](docs/USAGE.md), [experiment catalog](docs/METHODS.md#experiments) |
+| Interpret errors, energies, and runtime | [Metrics](docs/METHODS.md#metrics) |
+| Check numerical reproducibility | [Theory-to-code audit](docs/METHODS.md#theory-to-code-traceability), [validation](docs/VALIDATION.md) |
 
 ![Mean symbol error rate under two corruption channels for four alphabets.](figures/recall_summary.png)
 
@@ -62,7 +61,7 @@ Convergence does not guarantee recovery of the intended memory. The term “iner
 fields. Markers show the median of five timing repetitions and bars their range.
 All methods share conservative tie handling. The four cardinalities are
 16, 64, 256, and 1024; N=576 remains fixed. [Vector PDF](figures/activation_scaling.pdf)
-· [Protocol and implementation audit](docs/METHODS_AUDIT.md).*
+· [Protocol and implementation audit](docs/METHODS.md#cardinality-experiment).*
 
 ## Getting Started
 
@@ -110,7 +109,7 @@ Run commands from the repository root. Choose a new output directory; existing r
 
 **Validated directly in Colab (19 October 2026):** all four v1.0.2 notebooks completed full execution from these GitHub links. Scientific results reproduced within 1e-9; all five paper figures were regenerated with matching plotting data and regular Termes typography. PNG rendering and hardware-dependent timings can differ. [Run record and evidence limits](validation/colab_v1.0.2/README.md).
 
-Select **Runtime → Run all**. Each notebook downloads the tagged public source, defaults to `MODE = "full"`, records its environment, and exports its results. Use `"smoke"` for a short execution check. See [Colab instructions](docs/COLAB.md).
+Select **Runtime → Run all**. Each notebook downloads the tagged public source, defaults to `MODE = "full"`, records its environment, and exports its results. Use `"smoke"` for a short execution check. The first code cell also holds the global switches `SAVE_DATA` and `SAVE_FIGURES`, which decide whether a run keeps its data and figures. See [Colab instructions](docs/USAGE.md#google-colab) and [save switches](docs/USAGE.md#save-switches).
 
 ### What the data show
 
@@ -131,7 +130,7 @@ The companion includes a separate full Google Colab replication of the numerical
 | Radial error | Mean absolute modulus error, normalized by `Rmax` |
 | Query time | Measured microseconds per query; environment dependent |
 
-[Full definitions and interpretation](docs/METRICS.md).
+[Full definitions and interpretation](docs/METHODS.md#metrics).
 
 ## Project Structure
 
@@ -141,15 +140,14 @@ The companion includes a separate full Google Colab replication of the numerical
 ├── colab/             # Four runnable notebooks
 ├── configs/           # Explicit ordered alphabet coordinates
 ├── data/paper/        # Trial-level publication measurements
-├── data/queries/      # All benchmark field/current-symbol pairs
-├── figures/           # Vector PDF/SVG, 600 dpi PNG, and source data
+├── figures/           # Paper PDFs, README images, and source data
 ├── tables/            # Generated CSV and LaTeX tables
 ├── paper/             # Manuscript, bibliography, and paper assets
 ├── validation/        # Numerical audits and separate hosted measurements
 ├── scripts/           # Rendering, checking, notebook, and packaging tools
 ├── tests/             # Mathematical unit tests
 ├── examples/          # Minimal working example
-├── docs/              # Methods, usage, metrics, and figure gallery
+├── docs/              # Methods, usage, and validation
 └── .github/           # Continuous integration and contribution templates
 ```
 
@@ -159,7 +157,7 @@ The paper configuration runs 1,600 saturation trajectories, 2,400 noise-recall t
 
 The default engine independently implements the activation rules, weight matrices, asynchronous updates, corruptions, and metrics. It records an energy check at every changed coordinate. Unit tests compare small trajectories with full field/energy recomputation; stored full-run audits check energy descent and terminal decisions.
 
-Explicit ordered coordinates in `configs/ordered_alphabets.json` prevent platform-dependent ordering of equal-radius symbols. Conservative tie handling retains the current state when it belongs to the numerical minimizing set. `data/queries` contains all benchmark field/current-symbol pairs. The selected HSV illustration uses the disclosed successful trial with seed 120044901; aggregate tables include all trials.
+Explicit ordered coordinates in `configs/ordered_alphabets.json` prevent platform-dependent ordering of equal-radius symbols. Conservative tie handling retains the current state when it belongs to the numerical minimizing set. Every activation-cost run regenerates all benchmark field/current-symbol pairs from fixed seeds. The selected HSV illustration uses the disclosed successful trial with seed 120044901; aggregate tables include all trials.
 
 `scripts/check_consistency.py` verifies dataset hashes, generated tables, five manuscript figures, citation keys, notebook structures, geometry, hosted measurements, and quoted manuscript values. The CI matrix runs these checks on Linux and Windows with Python 3.12 and 3.13. [Complete protocol](docs/EXPERIMENTS.md) · [Numerical conventions](docs/METHODS_AUDIT.md).
 

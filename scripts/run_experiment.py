@@ -11,6 +11,11 @@ def main(stage=None):
     parser.add_argument('--mode',choices=['smoke','full'],default='smoke')
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--engine',choices=['independent','reference'],default='independent')
+    from cvhnn import settings
+    parser.add_argument('--no-save-data',dest='save_data',action='store_false',default=settings.SAVE_DATA,
+                        help='Discard CSV/NPZ/JSON results after the run (also CVHNN_SAVE_DATA=0).')
+    parser.add_argument('--no-save-figures',dest='save_figures',action='store_false',default=settings.SAVE_FIGURES,
+                        help='Discard PNG/PDF figures after the run (also CVHNN_SAVE_FIGURES=0).')
     args=parser.parse_args()
     stage=stage or args.stage
     out=args.output.resolve()
@@ -44,5 +49,9 @@ def main(stage=None):
     if audits is not None:
         from cvhnn.independent_adapter import save_audits
         save_audits(audits,out)
+    settings.retain(out,args.save_data,args.save_figures)
+    if not (args.save_data and args.save_figures):
+        kept=[name for name,keep in [('data',args.save_data),('figures',args.save_figures)] if keep]
+        print(f'Saved: {", ".join(kept) or "nothing"} ({out})')
 
 if __name__=='__main__':main()

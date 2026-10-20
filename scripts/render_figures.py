@@ -29,7 +29,7 @@ def style():
         'pdf.fonttype':42,'ps.fonttype':42,'svg.fonttype':'none'})
 
 def save(fig,name,out):
-    for ext in ['pdf','svg','png']:
+    for ext in ['pdf','png']:
         fig.savefig(out/f'{name}.{ext}',dpi=600,bbox_inches='tight',pad_inches=.05)
     plt.close(fig)
 
@@ -42,13 +42,18 @@ def clip(poly,a,b):
         if (u<0<v) or (v<0<u):result.append(p+(q-p)*u/(u-v))
     return np.asarray(result)
 
+def trajectories(data):
+    """Publication data store the large history compressed; fresh runs write plain CSV."""
+    path=data/'experiment1_trajectories.csv'
+    return pd.read_csv(path if path.exists() else path.with_suffix('.csv.gz'))
+
 def render(data,out):
     out.mkdir(parents=True,exist_ok=True);(out/'source_data').mkdir(exist_ok=True)
     style()
     from render_geometry import render as render_geometry
     render_geometry(out)
 
-    h=pd.read_csv(data/'experiment1_trajectories.csv')
+    h=trajectories(data)
     d=h[(h.alphabet=='16-QAM')&(h.init_protocol=='uniform')]
     # Terminal values are carried forward in the original trajectories.
     g=d.groupby(['rule','sweep'])[['E_c','E_r','rho','boundary_fraction']].agg(['mean','std']).reset_index()
@@ -107,7 +112,7 @@ def render(data,out):
        scale_shape_manual(values={'Classical':'s','Voronoi':'o'})+
        theme_minimal(base_size=10)+theme(figure_size=(10,4.7),legend_position='bottom',text=element_text(family='Termes Figure'))+
        labs(x='Nominal corruption level',y='Mean symbol error rate',color='',shape=''))
-    for ext in ['pdf','svg','png']:p.save(out/f'recall_summary.{ext}',dpi=600,verbose=False)
+    for ext in ['pdf','png']:p.save(out/f'recall_summary.{ext}',dpi=600,verbose=False)
     from render_cost import render as render_cost
     render_cost(data,out)
     print(f'Artwork written to {out}')

@@ -22,9 +22,13 @@ def main():
             assert item['keys_match'] and item['matches_at_1e-9'], name
     assert report['activation_cost']['rows'] == 600
     assert report['activation_cost']['minimum_agreement'] == 1
-    a = pd.read_csv(ARCHIVE/'saturation/experiment1_trajectories.csv')
-    b = pd.read_csv(ROOT/'data/paper/experiment1_trajectories.csv')
-    pd.testing.assert_frame_equal(a, b, check_exact=True)
+    # The hosted history parsed identically to the publication history, so only
+    # the comparison record is archived; the shared table is in data/paper.
+    history = json.loads((ARCHIVE/'saturation/hosted_comparison.json').read_text())['experiment1_trajectories.csv']
+    assert history['keys_match'] and history['pass_at_1e-9']
+    assert all(d.get('max_abs', 0) == 0 and d.get('equal', True) for d in history['differences'].values())
+    b = pd.read_csv(ROOT/'data/paper/experiment1_trajectories.csv.gz')
+    assert history['rows'] == history['reference_rows'] == len(b) == 129600
     visual = pd.read_csv(ARCHIVE/'geometry/source_data/paper_visual_metrics.csv')
     original = pd.read_csv(ROOT/'figures/source_data/paper_visual_metrics.csv')
     pd.testing.assert_frame_equal(visual, original, check_exact=True)
@@ -41,10 +45,11 @@ def main():
         audit = json.loads((ARCHIVE/stage/'coordinate_audit_summary.json').read_text())
         assert audit['coordinate_energy_increases'] == audit['nonnegative_energy_changes'] == audit['terminal_rule_violations'] == 0
     query_report = json.loads((ARCHIVE/'activation_cost/hosted_comparison.json').read_text())
+    assert len(query_report['query_array_max_abs_differences']) == 32
     for arrays in query_report['query_array_max_abs_differences'].values():
         assert arrays['current'] == arrays['alphabet'] == 0
         assert arrays['field'] < 1e-12
-    print('PASS: full hosted numerical protocols; raw recall data; 129600 saturation history rows; 640000 queries; 61380 boundary decisions; energy audits.')
+    print('PASS: full hosted numerical protocols; raw recall data; 129600 saturation history rows (recorded comparison); 640000 regenerated queries (recorded comparison); 61380 boundary decisions; energy audits.')
 
 
 if __name__ == '__main__':
