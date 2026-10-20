@@ -34,31 +34,24 @@ Outputs saved in experiment3_outputs/:
 - high-resolution 300 dpi figures in PNG and PDF
 - experiment3_outputs.zip
 
-Recommended Colab usage:
+Run it through the common launcher, which sets the output folder and the
+smoke-mode sizes (cvhnn.config.SMOKE_OVERRIDES):
 
-    !python experiment3_voronoi_activation_cost_colab.py
-
-Useful quick-test overrides:
-
-    %env EXP3_N_QUERY_UNIFORM=3000
-    %env EXP3_N_QUERY_FIELDS=3000
-    %env EXP3_N_REPEATS=2
-    !python experiment3_voronoi_activation_cost_colab.py
+    python experiments/03_activation_cost.py --mode full --output runs/activation_cost
 """
 
 from __future__ import annotations
 
 import math
-import os
 import shutil
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any
 
 import numpy as np
 import pandas as pd
-
 
 try:
     from scipy.spatial import cKDTree
@@ -75,30 +68,30 @@ except Exception as exc:  # pragma: no cover - depends on Colab environment.
 # User-facing configuration
 # =========================
 
-OUTPUT_DIR = Path(os.getenv("EXP3_OUTPUT_DIR", "experiment3_outputs"))
-RANDOM_SEED = int(os.getenv("EXP3_RANDOM_SEED", "20260901"))
+OUTPUT_DIR = Path("experiment3_outputs")
+RANDOM_SEED = 20260901
 
 FAMILIES = ("PSK", "QAM", "Polar", "Hexagonal")
 CARDINALITIES = (16, 64, 256, 1024)
 
-N_QUERY_UNIFORM = int(os.getenv("EXP3_N_QUERY_UNIFORM", "20000"))
-N_QUERY_FIELDS = int(os.getenv("EXP3_N_QUERY_FIELDS", "20000"))
-N_REPEATS = int(os.getenv("EXP3_N_REPEATS", "5"))
-CHUNK_SIZE = int(os.getenv("EXP3_CHUNK_SIZE", "4096"))
+N_QUERY_UNIFORM = 20000
+N_QUERY_FIELDS = 20000
+N_REPEATS = 5
+CHUNK_SIZE = 4096
 
 # Experiment-2-like local-field generation.
 IMAGE_SHAPE = (24, 24)
 P_FIELDS = 4
 FIELD_HSV_NOISE = 0.10
-FIELD_SWEEPS = int(os.getenv("EXP3_FIELD_SWEEPS", "3"))
-MIN_FIELD_TRIALS = int(os.getenv("EXP3_MIN_FIELD_TRIALS", "10"))
+FIELD_SWEEPS = 3
+MIN_FIELD_TRIALS = 10
 PINV_RCOND = 1e-10
 
-KD_WORKERS = int(os.getenv("EXP3_KD_WORKERS", "1"))
+KD_WORKERS = 1
 
 FIG_DPI = 300
-SAVE_FIGURES = os.getenv("EXP3_SAVE_FIGURES", "1") != "0"
-OVERWRITE_OUTPUT_DIR = os.getenv("EXP3_OVERWRITE_OUTPUT_DIR", "1") != "0"
+MAKE_FIGURES = True
+OVERWRITE_OUTPUT_DIR = True
 
 
 # =====================
@@ -150,7 +143,7 @@ def make_hexagonal(m: int) -> np.ndarray:
     search_radius = max(3, int(math.ceil(math.sqrt(m) / 2.0)) + 3)
     omega = np.exp(1j * np.pi / 3.0)
     while True:
-        points: List[complex] = []
+        points: list[complex] = []
         for a in range(-search_radius, search_radius + 1):
             for b in range(-search_radius, search_radius + 1):
                 points.append(a + b * omega)
@@ -163,6 +156,7 @@ def make_hexagonal(m: int) -> np.ndarray:
 
 def make_alphabet(family: str, m: int) -> np.ndarray:
     from .ordered_alphabets import load_group
+
     key = f"{family}:{m}"
     published = load_group("activation_cost")
     if key in published:
@@ -285,7 +279,7 @@ def build_score_method(alphabet: np.ndarray) -> BuiltMethod:
     )
 
 
-def build_kdtree_method(alphabet: np.ndarray) -> Optional[BuiltMethod]:
+def build_kdtree_method(alphabet: np.ndarray) -> BuiltMethod | None:
     if not SCIPY_AVAILABLE:
         return None
     t0 = time.perf_counter()
@@ -436,7 +430,7 @@ def build_structured_polar(alphabet: np.ndarray) -> BuiltMethod:
     )
 
 
-def build_structured_method(family: str, alphabet: np.ndarray) -> Optional[BuiltMethod]:
+def build_structured_method(family: str, alphabet: np.ndarray) -> BuiltMethod | None:
     if family == "PSK":
         return build_structured_psk(alphabet)
     if family == "QAM":
@@ -446,7 +440,7 @@ def build_structured_method(family: str, alphabet: np.ndarray) -> Optional[Built
     return None
 
 
-def build_methods(family: str, alphabet: np.ndarray) -> List[BuiltMethod]:
+def build_methods(family: str, alphabet: np.ndarray) -> list[BuiltMethod]:
     methods = [build_distance_method(alphabet), build_score_method(alphabet)]
     kd_method = build_kdtree_method(alphabet)
     if kd_method is not None:
@@ -470,9 +464,9 @@ def hsv_fields_to_complex(hue: np.ndarray, saturation: np.ndarray, rmax: float =
 
 def generate_synthetic_hsv_memories(
     num_memories: int,
-    image_shape: Tuple[int, int],
+    image_shape: tuple[int, int],
     seed: int = RANDOM_SEED,
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray]:
     height, width = image_shape
     y = np.linspace(-1.0, 1.0, height)
     x = np.linspace(-1.0, 1.0, width)
@@ -502,13 +496,7 @@ def generate_synthetic_hsv_memories(
         blob = np.exp(-((xx - cx) ** 2 + (yy - cy) ** 2) / (2.0 * blob_width**2))
         diagonal = 0.5 + 0.5 * np.sin((mu + 1) * np.pi * (xx + yy))
 
-        raw_saturation = (
-            0.32 * waves
-            + 0.25 * rings
-            + 0.25 * (1.0 - radius_norm)
-            + 0.30 * blob
-            + 0.12 * diagonal
-        )
+        raw_saturation = 0.32 * waves + 0.25 * rings + 0.25 * (1.0 - radius_norm) + 0.30 * blob + 0.12 * diagonal
         raw_saturation -= raw_saturation.min()
         raw_saturation /= raw_saturation.max() + 1e-12
         saturation = 0.04 + 0.96 * raw_saturation
@@ -549,7 +537,7 @@ def collect_local_fields(
     alphabet: np.ndarray,
     q: int,
     seed: int,
-) -> Tuple[np.ndarray, Dict[str, Any]]:
+) -> tuple[np.ndarray, dict[str, Any]]:
     rng = np.random.default_rng(seed)
     n = IMAGE_SHAPE[0] * IMAGE_SHAPE[1]
     snapshots_per_trial = FIELD_SWEEPS + 1
@@ -561,7 +549,7 @@ def collect_local_fields(
     memory_values = alphabet[memory_indices]
     w = build_projection_weights(memory_values)
 
-    fields: List[np.ndarray] = []
+    fields: list[np.ndarray] = []
     for trial in range(n_trials):
         target_mu = trial % P_FIELDS
         initial_indices = make_hsv_corrupted_indices(
@@ -627,13 +615,13 @@ def activation_field_ratio(flops_per_query: float) -> float:
     return flops_per_query / (8.0 * n)
 
 
-def time_method(method: BuiltMethod, z: np.ndarray, reference: np.ndarray) -> Tuple[List[Dict[str, Any]], np.ndarray]:
+def time_method(method: BuiltMethod, z: np.ndarray, reference: np.ndarray) -> tuple[list[dict[str, Any]], np.ndarray]:
     # Warm-up outside the measured repetitions.
     warmup_n = min(512, len(z))
     method.query(z[:warmup_n])
 
-    rows: List[Dict[str, Any]] = []
-    first_indices: Optional[np.ndarray] = None
+    rows: list[dict[str, Any]] = []
+    first_indices: np.ndarray | None = None
     for repeat in range(N_REPEATS):
         t0 = time.perf_counter()
         indices = method.query(z)
@@ -669,13 +657,13 @@ def benchmark_case(
     m: int,
     ensemble_name: str,
     z: np.ndarray,
-) -> List[Dict[str, Any]]:
+) -> list[dict[str, Any]]:
     alphabet = make_alphabet(family, m)
     methods = build_methods(family, alphabet)
     reference_method = methods[0]
     reference = reference_method.query(z)
 
-    rows: List[Dict[str, Any]] = []
+    rows: list[dict[str, Any]] = []
     for method in methods:
         method_rows, _ = time_method(method, z, reference)
         for row in method_rows:
@@ -718,9 +706,7 @@ def summarize(raw: pd.DataFrame) -> pd.DataFrame:
         ["ensemble", "family", "cardinality", "time_per_query_us_mean"]
     ].rename(columns={"time_per_query_us_mean": "distance_time_per_query_us_mean"})
     summary = summary.merge(baseline, on=["ensemble", "family", "cardinality"], how="left")
-    summary["speedup_vs_distance"] = (
-        summary["distance_time_per_query_us_mean"] / summary["time_per_query_us_mean"]
-    )
+    summary["speedup_vs_distance"] = summary["distance_time_per_query_us_mean"] / summary["time_per_query_us_mean"]
     return summary
 
 
@@ -748,8 +734,8 @@ def save_text_tables(summary: pd.DataFrame, out_dir: Path) -> None:
     (out_dir / "experiment3_summary.txt").write_text(text, encoding="utf-8")
 
 
-def write_report(summary: pd.DataFrame, field_infos: List[Dict[str, Any]], out_dir: Path) -> None:
-    lines: List[str] = []
+def write_report(summary: pd.DataFrame, field_infos: list[dict[str, Any]], out_dir: Path) -> None:
+    lines: list[str] = []
     n = IMAGE_SHAPE[0] * IMAGE_SHAPE[1]
     lines.append("Experiment 3: computational cost of exact Voronoi activation")
     lines.append("=" * 68)
@@ -782,16 +768,14 @@ def write_report(summary: pd.DataFrame, field_infos: List[Dict[str, Any]], out_d
     else:
         lines.append("- Some methods disagreed with the exhaustive reference; inspect these rows:")
         lines.append(
-            low_agreement[
-                ["ensemble", "family", "cardinality", "method", "agreement_min"]
-            ].to_string(index=False, float_format=lambda x: f"{x:.9g}")
+            low_agreement[["ensemble", "family", "cardinality", "method", "agreement_min"]].to_string(
+                index=False, float_format=lambda x: f"{x:.9g}"
+            )
         )
     lines.append("")
 
     lines.append("Fastest method by case")
-    fastest = summary.loc[
-        summary.groupby(["ensemble", "family", "cardinality"])["time_per_query_us_mean"].idxmin()
-    ][
+    fastest = summary.loc[summary.groupby(["ensemble", "family", "cardinality"])["time_per_query_us_mean"].idxmin()][
         [
             "ensemble",
             "family",
@@ -814,7 +798,10 @@ def write_report(summary: pd.DataFrame, field_infos: List[Dict[str, Any]], out_d
     lines.append("Cost model")
     lines.append("- Exhaustive distance search: approximately 5|S| flops and |S|-1 comparisons per query.")
     lines.append("- Exhaustive inertial-score search: approximately 4|S| flops and |S|-1 comparisons per query.")
-    lines.append("- For dense incremental asynchronous updates, maintaining the local field costs about 8N flops per neuron update.")
+    lines.append(
+        "- For dense incremental asynchronous updates, maintaining the local field costs "
+        "about 8N flops per neuron update."
+    )
     lines.append("- The reported activation_field_ratio_est is flops_per_query_est/(8N).")
     lines.append("")
     lines.append("Full numerical tables are saved in CSV and TXT files in this folder.")
@@ -822,7 +809,7 @@ def write_report(summary: pd.DataFrame, field_infos: List[Dict[str, Any]], out_d
     (out_dir / "experiment3_cost_report.txt").write_text("\n".join(lines), encoding="utf-8")
 
 
-def method_style(method: str) -> Tuple[str, str]:
+def method_style(method: str) -> tuple[str, str]:
     styles = {
         "distance": ("#b23a48", "o"),
         "inertial_score": ("#8b5a2b", "s"),
@@ -838,7 +825,7 @@ def save_time_figure(summary: pd.DataFrame, ensemble: str, out_dir: Path) -> Non
     sub = summary[summary["ensemble"] == ensemble]
     fig, axes = plt.subplots(2, 2, figsize=(8.2, 6.4), sharex=True, sharey=True)
     methods = ["distance", "inertial_score", "kdtree", "structured"]
-    for ax, family in zip(axes.ravel(), FAMILIES):
+    for ax, family in zip(axes.ravel(), FAMILIES, strict=True):
         fam = sub[sub["family"] == family]
         for method in methods:
             data = fam[fam["method"] == method].sort_values("cardinality")
@@ -911,7 +898,7 @@ def save_ratio_figure(out_dir: Path) -> None:
 
 
 def save_figures(summary: pd.DataFrame, out_dir: Path) -> None:
-    if not SAVE_FIGURES:
+    if not MAKE_FIGURES:
         return
     save_time_figure(summary, "uniform", out_dir)
     save_time_figure(summary, "local_fields", out_dir)
@@ -954,8 +941,8 @@ def main() -> None:
     prepare_output_dir(OUTPUT_DIR)
     save_configuration(OUTPUT_DIR)
 
-    raw_rows: List[Dict[str, Any]] = []
-    field_infos: List[Dict[str, Any]] = []
+    raw_rows: list[dict[str, Any]] = []
+    field_infos: list[dict[str, Any]] = []
 
     for family_idx, family in enumerate(FAMILIES):
         for m in CARDINALITIES:

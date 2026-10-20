@@ -6,7 +6,7 @@
 
 ## Environment
 
-Use Python 3.12 or 3.13 and install `requirements.txt`. Direct package versions from the publication run are recorded in `requirements-lock.txt`; each experiment additionally writes `execution.json` with the actual Python, OS, NumPy, pandas, and SciPy versions.
+Use Python 3.12 or 3.13 and run `python -m pip install -r requirements.txt` from the repository root. This installs the `cvhnn` package in editable mode together with the dependencies declared in `pyproject.toml`. Direct package versions from the publication run are recorded in `requirements-lock.txt`; to use exactly those, run `python -m pip install -r requirements-lock.txt` followed by `python -m pip install --no-deps -e .`. Run-level settings (paths, stages, smoke-mode sizes, comparison tolerance, save switches) are in `src/cvhnn/config.py`; protocol constants stay at the top of each experiment module, because every run records them in `execution.json`, together with the actual Python, OS, NumPy, pandas, and SciPy versions.
 
 One BLAS thread is used by the launchers. Matplotlib uses a noninteractive backend for exported figures. No LaTeX installation is required for simulation or plotting; manuscript compilation uses pdfLaTeX/BibTeX-compatible sources and the IEEEtran class.
 
@@ -34,7 +34,7 @@ Two global switches decide what a run leaves on disk. Experiments always write a
 | `SAVE_DATA` | CSV, NPZ, JSON, TXT results | first code cell | `--no-save-data` | `CVHNN_SAVE_DATA=0` |
 | `SAVE_FIGURES` | PNG, PDF, SVG figures | first code cell | `--no-save-figures` | `CVHNN_SAVE_FIGURES=0` |
 
-Both default to `True`. Run records (`execution.json`, `notebook_runtime.json`, `comparison.json`) are kept with whatever is saved. With both switches off, a notebook only shows its results inline and its output folder is deleted; `reproduce_all.py` keeps only `comparison.json`. The command-line flags apply to `reproduce_all.py` and to the three `experiments/` entrypoints. The rule is implemented once in `src/cvhnn/settings.py`; the notebooks carry an inline copy so they also run against the tagged source on Colab.
+Both default to `True`. Run records (`execution.json`, `notebook_runtime.json`, `comparison.json`) are kept with whatever is saved. With both switches off, a notebook only shows its results inline and its output folder is deleted; `reproduce_all.py` keeps only `comparison.json`. The command-line flags apply to `reproduce_all.py` and to the three `experiments/` entrypoints. The rule is implemented once in `src/cvhnn/config.py` (`retain`); the notebooks carry an inline copy so they also run against the tagged source on Colab.
 
 ```bash
 # Repeat the full study, keep only the verdict against the publication data:
