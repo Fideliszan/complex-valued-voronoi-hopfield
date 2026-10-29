@@ -18,7 +18,10 @@ if __name__ == "__main__":
         dest="save_data",
         action="store_false",
         default=config.SAVE_DATA,
-        help="Keep only comparison.json and run records, not the trial data.",
+        help=(
+            "Discard trial data. Keep stage run records when figures are retained; "
+            "with both save switches off, keep only the top-level comparison.json."
+        ),
     )
     p.add_argument(
         "--no-save-figures",

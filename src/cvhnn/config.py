@@ -18,7 +18,6 @@ CONFIGS = ROOT / "configs"
 PAPER_DATA = ROOT / "data" / "paper"
 FIGURES = ROOT / "figures"
 TABLES = ROOT / "tables"
-PAPER = ROOT / "paper"
 VALIDATION = ROOT / "validation"
 HOSTED = VALIDATION / "hosted"
 RUNS = ROOT / "runs"
@@ -44,8 +43,7 @@ SELECTED_HSV_SEED = 120044901
 # JSON, TXT); SAVE_FIGURES keeps images (PNG, PDF, SVG). Both default to on and
 # are read from CVHNN_SAVE_DATA / CVHNN_SAVE_FIGURES ("0" disables). Runs always
 # write a complete output first, so checks can read it; `retain` then removes
-# what the switches do not keep. The notebooks carry an inline copy of `retain`
-# so that they also work with the tagged source cloned on Colab.
+# what the switches do not keep. The notebooks call the same `retain` function.
 def flag(name, default=True):
     return os.getenv(name, "1" if default else "0").strip().lower() not in ("0", "false", "no", "")
 

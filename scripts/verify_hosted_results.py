@@ -1,4 +1,4 @@
-"""Verify full hosted measurements against the manuscript and publication data."""
+"""Verify full hosted measurements against the frozen numerical reference data."""
 
 import hashlib
 import json

@@ -32,8 +32,8 @@ where = ["src"]
 line-length = 120
 target-version = "py312"
 src = ["src", "scripts"]
-# Generated notebooks and the frozen manuscript-packaging scripts are not linted.
-extend-exclude = ["colab", "runs", "scripts/build_overleaf.py", "scripts/build_anonymous_review.py"]
+# Generated notebooks and local experiment outputs are not linted.
+extend-exclude = ["colab", "runs"]
 
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "B", "UP", "SIM"]
