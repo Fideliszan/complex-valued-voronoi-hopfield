@@ -1,4 +1,4 @@
-"""Shared figure style: palette and the portable Times-family typography of the manuscript."""
+"""Shared figure style: palette and portable Times-family typography."""
 
 from matplotlib import font_manager, rcParams
 
