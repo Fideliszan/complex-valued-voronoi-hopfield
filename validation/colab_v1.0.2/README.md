@@ -23,4 +23,4 @@ Additional comparison cells were appended to the live Colab sessions after the d
 
 The browser did not complete downloads of the generated raw-output ZIPs or executed notebooks. Therefore this directory preserves the observed audit results and environment records, not a fresh raw-data archive or executed `.ipynb` files. Earlier raw hosted measurements in `../hosted/` belong to a separate validation and are not represented as downloads from this run. Browser UI exports and account information are excluded.
 
-This documentation update does not change the v1.0.2 tag, source code, manuscript, publication data, or released Overleaf ZIP.
+This historical record describes the tested v1.0.2 revision; it does not certify later source revisions.
