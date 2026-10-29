@@ -3,64 +3,112 @@
     "status": "passed",
     "mode": "full",
     "environment": "local",
-    "seconds": 6.7544244159944355,
+    "seconds": 16.960647021000113,
+    "utc_finished": "2026-10-29T10:11:26.339848+00:00",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
     "code_cell_sha256": [
       "332362155a10519c44df70d96510fff7d8ebe4a664ac310744af6a49e497e7b1",
-      "a95805afc09c6300c01daaadd5aedefe7c1321556d6baeaa18cd71f49b948fd6",
+      "21b92ef0acaab3b911e91a429dcee2e511a7aabbe2a7c1e86b189f134113d6f6",
       "d80c19005e6be9335395f1333bcbd876a87e95646158752087e786bc6dc2ca38",
       "3be64ba2f804b65f0dec2f150d01d82be2e156d201aacc8c1822aa0e9f84723e",
-      "e84214dbc9a891ce72a684d9332d59bac7f6505c23207e92ce10e754f6e4b8b7",
+      "78a795f3c3c64f7a16c00def6e6e67965bf6a8e441a789c8f6d5f89fc09413fe",
       "116c15c597426426b58fe0d6f1a8a4f6995f53b19ffcd1a5bebb66c9e3bd3ce1",
-      "9457f1f1284eac26e986d2f22606fa9a7f8dfc0dbbd2968f77bfdc866b131894"
+      "257d621c672b0159cf7460d12450facd8d3a79f3c0cc1674f6c0e92a061cdf51"
     ],
-    "rendered_png_outputs": 5
+    "rendered_png_outputs": 5,
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "seaborn": "0.13.2",
+      "plotnine": "0.15.8",
+      "nbclient": "0.11.0"
+    }
   },
   "01_saturation.ipynb": {
     "status": "passed",
     "mode": "full",
     "environment": "local",
-    "seconds": 22.215309417108074,
+    "seconds": 57.51702460500019,
+    "utc_finished": "2026-10-29T10:12:23.878477+00:00",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
     "code_cell_sha256": [
       "332362155a10519c44df70d96510fff7d8ebe4a664ac310744af6a49e497e7b1",
-      "a95805afc09c6300c01daaadd5aedefe7c1321556d6baeaa18cd71f49b948fd6",
+      "21b92ef0acaab3b911e91a429dcee2e511a7aabbe2a7c1e86b189f134113d6f6",
       "d80c19005e6be9335395f1333bcbd876a87e95646158752087e786bc6dc2ca38",
       "b66de8e979bf195269bb77c119b24e0d734fbe90dc48a4cc4835a1252bebf732",
-      "c331b18bd3b0a5a7a899526e6208714758808a9d18df97cb9ed1689e8951a942",
+      "f7a7fa6226be0b2d74db02d574fa9e1ee20e50277a1ae770b83724d1d34709de",
       "4751e5a022c933e9b62194e055608d5de285ec802bd3179d09c71b7ebe8b99a3",
-      "9457f1f1284eac26e986d2f22606fa9a7f8dfc0dbbd2968f77bfdc866b131894"
+      "257d621c672b0159cf7460d12450facd8d3a79f3c0cc1674f6c0e92a061cdf51"
     ],
-    "rendered_png_outputs": 1
+    "rendered_png_outputs": 1,
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "seaborn": "0.13.2",
+      "plotnine": "0.15.8",
+      "nbclient": "0.11.0"
+    }
   },
   "02_hsv_recall.ipynb": {
     "status": "passed",
     "mode": "full",
     "environment": "local",
-    "seconds": 58.359351749997586,
+    "seconds": 129.87781744799986,
+    "utc_finished": "2026-10-29T10:14:33.778604+00:00",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
     "code_cell_sha256": [
       "332362155a10519c44df70d96510fff7d8ebe4a664ac310744af6a49e497e7b1",
-      "a95805afc09c6300c01daaadd5aedefe7c1321556d6baeaa18cd71f49b948fd6",
+      "21b92ef0acaab3b911e91a429dcee2e511a7aabbe2a7c1e86b189f134113d6f6",
       "d80c19005e6be9335395f1333bcbd876a87e95646158752087e786bc6dc2ca38",
       "b8363afe62f91027d65dafd34964926684a9e761c06fc12c9cb63b7ff467e95d",
-      "dcb080687995ee7ac7caaedfa14d4226b25eb4990933d701914a7d4f5b07df18",
+      "365f6769bb8c0ed833a48775299e2d427dfbc8a019de7876bc52eb6e177d6019",
       "cfb7dffd723bae190d692462b8f8e2f5829d28775ec0ba2dbc03e674a4a3f6ef",
-      "9457f1f1284eac26e986d2f22606fa9a7f8dfc0dbbd2968f77bfdc866b131894"
+      "257d621c672b0159cf7460d12450facd8d3a79f3c0cc1674f6c0e92a061cdf51"
     ],
-    "rendered_png_outputs": 1
+    "rendered_png_outputs": 1,
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "seaborn": "0.13.2",
+      "plotnine": "0.15.8",
+      "nbclient": "0.11.0"
+    }
   },
   "03_activation_cost.ipynb": {
     "status": "passed",
     "mode": "full",
     "environment": "local",
-    "seconds": 20.719077792018652,
+    "seconds": 42.113251409999975,
+    "utc_finished": "2026-10-29T10:15:15.911039+00:00",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
     "code_cell_sha256": [
       "332362155a10519c44df70d96510fff7d8ebe4a664ac310744af6a49e497e7b1",
-      "a95805afc09c6300c01daaadd5aedefe7c1321556d6baeaa18cd71f49b948fd6",
+      "21b92ef0acaab3b911e91a429dcee2e511a7aabbe2a7c1e86b189f134113d6f6",
       "d80c19005e6be9335395f1333bcbd876a87e95646158752087e786bc6dc2ca38",
       "0a6617b1545bf2f63ddafd74b64546389cd0dedb1b5d3a0d3307c7d483568bca",
-      "181a93b729467adc59633d91bde249da9ca9bca4551fc43baf969e9d0dcd198f",
+      "bec50cda60c89e9882d557de7c975df62ec80281aa6f672f8c1caa7e2036db0e",
       "476ff4f6a543ad95741281119a5ff671c4d77adddfbe0ede0719f29dba846989",
-      "9457f1f1284eac26e986d2f22606fa9a7f8dfc0dbbd2968f77bfdc866b131894"
+      "257d621c672b0159cf7460d12450facd8d3a79f3c0cc1674f6c0e92a061cdf51"
     ],
-    "rendered_png_outputs": 1
+    "rendered_png_outputs": 1,
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "seaborn": "0.13.2",
+      "plotnine": "0.15.8",
+      "nbclient": "0.11.0"
+    }
   }
-}
+}
