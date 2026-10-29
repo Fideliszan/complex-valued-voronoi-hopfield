@@ -1,4 +1,4 @@
-"""Generate the numerical manuscript tables and complete cardinality summary from trial-level CSVs."""
+"""Generate numerical tables and a cardinality summary from reference trial-level CSVs."""
 
 import argparse
 import json
@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from cvhnn.config import PAPER_DATA, TABLES
+from cvhnn.config import PAPER_DATA, RUNS
 
 
 def build(data, out):
@@ -111,6 +111,6 @@ def build(data, out):
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--data", type=Path, default=PAPER_DATA)
-    p.add_argument("--output", type=Path, default=TABLES)
+    p.add_argument("--output", type=Path, default=RUNS / "tables")
     a = p.parse_args()
     print(build(a.data, a.output))
