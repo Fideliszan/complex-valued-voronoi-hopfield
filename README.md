@@ -7,65 +7,21 @@
 [![Code MIT](https://img.shields.io/badge/Code-MIT-16877A)](LICENSE)
 [![Data CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-8F6593)](LICENSE-DATA.md)
 
-[Overview](#overview) · [Getting Started](#getting-started) · [Usage](#usage) · [Metrics](#metrics) · [Project Structure](#project-structure) · [Citation](#citation) · [License](#license)
+Computational companion for finite-alphabet complex-valued Hopfield networks: Python implementations, runnable notebooks, small experimental inputs, and frozen numerical references. The current source tree does not distribute the manuscript text or its submission packages.
 
-[Read the manuscript](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Manuscript_1.0.2.pdf) · [Download the final Overleaf ZIP](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_Overleaf_1.0.2_AI_Disclosure_Final.zip) · [Browse the documentation](docs/README.md)
-
-**For Overleaf, download `Complex_Voronoi_Overleaf_1.0.2_AI_Disclosure_Final.zip` using the link above.** This recommended package contains the manuscript, figures, complete computational companion, and records of both the direct Colab validation of all four v1.0.2 notebooks and the Overleaf compilation and figure-preservation checks. In Overleaf, choose **New project → Existing project (.zip)**, upload this ZIP, and compile `main.tex`. The original ZIP remains in the release for archival purposes; the recommended package adds the validation documentation without changing the manuscript or figures.
-
-> **Research companion.** Reproduce the paper from source, inspect the trial-level results, or launch one of the four CPU notebooks below. No external dataset or GitHub credentials are needed.
-
-**Previous package verified directly in Overleaf (19 October 2026):** 14 pages, **0 errors and 0 warnings**, all fonts embedded, both Colab and Overleaf validation folders included. All five figures are preserved and all 14 rendered pages match the previous validated PDF. [Open the final identified project](https://www.overleaf.com/project/6ad61683c0bbc25d3c18a031) · [Final verification record](validation/overleaf_final_v1.0.2/README.md).
-
-**AI disclosure verified in Overleaf (19 October 2026):** the manuscript compiled to 14 pages with **0 errors and 0 warnings**. The exact author-provided declaration appears on page 13 in `Acknowledgments`, before the references. [Open the current manuscript project](https://www.overleaf.com/project/6ad621abc71ccf417d50c66b) · [Verification record](validation/overleaf_ai_disclosure_v1.0.2/README.md). The final complete ZIP includes this record and all previous Colab/Overleaf validation records; its compilation sources are identical to the tested AI-disclosure package.
-
-**For TNNLS double-anonymous review:** use the separate [anonymous manuscript ZIP](https://github.com/Fideliszan/complex-valued-voronoi-hopfield/releases/download/v1.0.2/Complex_Voronoi_TNNLS_Anonymous_Review_1.0.2.zip) or [anonymous Overleaf project](https://www.overleaf.com/project/6ad61772c0bbc25d3c1940b3). That previously released anonymous copy predates the AI-use declaration; regenerate it from current source before submission. It compiled to 14 pages with 0 errors and 0 warnings. Keep the identified reproducibility archive separate from review attachments. [TNNLS format review, page limits and author requirements](docs/TNNLS_FINAL_REVIEW.md).
+[Methods and metrics](docs/METHODS.md) · [Usage](docs/USAGE.md) · [Validation](docs/VALIDATION.md)
 
 ## Overview
 
-An associative memory stores patterns and attempts to recover them from corrupted cues. In this work each neuron takes a symbol from a finite subset of the complex plane, encoding both phase and magnitude. The question is how the local update should respect that geometry while retaining an energy descent guarantee.
-
-The classical rule maximizes the real inner product with the local field. On a multi-amplitude alphabet, this can favor large symbols even when a smaller symbol is nearer. The proposed activation selects the Euclidean nearest symbol and retains the current symbol on ties whenever possible. Its associated inertial energy adds half the squared state norm to the classical Hopfield energy.
+The classical activation maximizes the real inner product with the local field. The Voronoi activation chooses a nearest complex symbol and retains the current symbol on ties whenever possible. On multi-amplitude alphabets, the two rules can produce different magnitude behavior. The associated inertial energy adds half the squared state norm to the classical Hopfield energy.
 
 ![Four finite complex alphabets and their clipped Voronoi cells.](figures/constellations.png)
 
-*PSK, QAM, polar, and hexagonal alphabets. Filled points are alphabet symbols; hollow rings identify maximum-modulus symbols. Thin boundaries and muted fills distinguish adjacent Voronoi cells; the dotted circle shows the maximum radius. [Vector PDF](figures/constellations.pdf) · [Geometric interpretation](docs/METHODS.md#model).*
+Three experiments study magnitude saturation, HSV associative recall, and exact nearest-symbol query cost. Convergence assumes Hermitian weights, nonnegative diagonal, and fair asynchronous updates; it does not guarantee recovery of a specified memory. See [methods and scope](docs/METHODS.md).
 
-### Contributions and limits
+## Getting started
 
-- Identify the magnitude saturation bias of classical inner-product updates on multi-amplitude alphabets.
-- Formulate a finite-alphabet Voronoi activation with conservative deterministic tie handling, and establish finite convergence under Hermitian weights with nonnegative diagonal and a fair asynchronous schedule.
-- Test the mechanism, HSV recall, and alternative exact nearest-symbol implementations in three separate experiments.
-
-Convergence does not guarantee recovery of the intended memory. The term “inertial” refers to the quadratic state penalty; the model is not a momentum-based second-order dynamics. The experiments use synthetic patterns and do not establish universal superiority over other associative memories. [Method and scope](docs/METHODS.md#scope).
-
-## Explore the evidence
-
-| I want to… | Start here |
-|---|---|
-| Understand the equations and assumptions | [Methods](docs/METHODS.md#model) |
-| Find the script behind a paper figure or table | [Paper map](docs/USAGE.md#paper-to-code-map) |
-| Run one experiment or all experiments | [Usage](docs/USAGE.md), [experiment catalog](docs/METHODS.md#experiments) |
-| Interpret errors, energies, and runtime | [Metrics](docs/METHODS.md#metrics) |
-| Check numerical reproducibility | [Theory-to-code audit](docs/METHODS.md#theory-to-code-traceability), [validation](docs/VALIDATION.md) |
-
-![Mean symbol error rate under two corruption channels for four alphabets.](figures/recall_summary.png)
-
-*Means include all trials. Squares denote classical updates; circles denote Voronoi updates. Nominal HSV and symbol-noise levels have different meanings and must not be treated as equal input error. [Trial data](data/paper/experiment2_noise_results.csv).*
-
-## Cardinality and computational cost
-
-![Activation costs for four alphabet cardinalities and two input distributions.](figures/activation_scaling.png)
-
-*Each column is an alphabet family; rows separate uniform and network-generated
-fields. Markers show the median of five timing repetitions and bars their range.
-All methods share conservative tie handling. The four cardinalities are
-16, 64, 256, and 1024; N=576 remains fixed. [Vector PDF](figures/activation_scaling.pdf)
-· [Protocol and implementation audit](docs/METHODS.md#cardinality-experiment).*
-
-## Getting Started
-
-**Prerequisites:** Python 3.12 or 3.13. A CPU is sufficient. The data are synthetic; no external image dataset is required.
+Use **Python 3.12 or 3.13**. A CPU is sufficient; synthetic images are generated locally and no external dataset is needed.
 
 ```bash
 git clone https://github.com/Fideliszan/complex-valued-voronoi-hopfield.git
@@ -73,100 +29,65 @@ cd complex-valued-voronoi-hopfield
 python -m venv .venv
 ```
 
-Activate with `source .venv/bin/activate` on Linux/macOS or `.venv\Scripts\Activate.ps1` in Windows PowerShell. Alternatively, invoke the environment's Python directly.
+Activate with `source .venv/bin/activate` on Linux/macOS or `.venv\Scripts\Activate.ps1` in Windows PowerShell, then run:
 
 ```bash
 python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
 python scripts/check_consistency.py
 python examples/quick_activation.py
-python -m unittest discover -s tests -v
 ```
 
-The small example shows a local field of 0.4 selecting radius 1 under the classical score and radius 0.3 under Euclidean projection. It also verifies the energy correction identity.
+Installation includes the editable `cvhnn` package. For the recorded dependency versions, see [Environment](docs/USAGE.md#environment).
 
 ## Usage
 
-Run commands from the repository root. Choose a new output directory; existing runs are never deleted automatically.
+Run commands from the repository root and choose a new output directory.
 
 | Task | Command |
 |---|---|
 | Short saturation run | `python experiments/01_saturation.py --mode smoke --output runs/small_saturation` |
 | Full saturation study | `python experiments/01_saturation.py --mode full --output runs/full/saturation` |
 | Full HSV recall | `python experiments/02_hsv_recall.py --mode full --output runs/full/recall` |
-| Full query benchmark | `python experiments/03_activation_cost.py --mode full --output runs/full/activation_cost` |
-| Rebuild paper artwork | `python scripts/render_figures.py --data data/paper --output figures` |
-| Recompute paper tables | `python scripts/build_tables.py --data data/paper` |
-| Run the entire battery | `python reproduce_all.py --mode full --output runs/reproduction` |
+| Full activation benchmark | `python experiments/03_activation_cost.py --mode full --output runs/full/activation_cost` |
+| Regenerate reference figures | `python scripts/render_figures.py --data data/paper --output runs/figures` |
+| Recompute reference tables | `python scripts/build_tables.py --data data/paper --output runs/tables` |
+| Reproduce all experiments | `python reproduce_all.py --mode full --output runs/reproduction` |
+
+Use `--no-save-data` and/or `--no-save-figures` to control retained outputs. The equivalent notebook switches are `SAVE_DATA` and `SAVE_FIGURES`; both default to `True`. Environment settings are `CVHNN_SAVE_DATA=0` and `CVHNN_SAVE_FIGURES=0`. [Output retention and examples](docs/USAGE.md#save-switches).
 
 ### Run in Google Colab
 
-| Notebook | What it does | Launch |
+| Notebook | Task | Launch |
 |---|---|---|
-| Geometry and paper figures | Rebuilds all five figures from the publication data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/00_geometry.ipynb) |
-| Saturation | Runs the paired energy and magnitude study | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/01_saturation.ipynb) |
-| HSV recall | Runs recall under symbol and HSV corruption | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/02_hsv_recall.ipynb) |
-| Activation cost | Benchmarks four alphabet cardinalities with exact decision checks | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/v1.0.2/colab/03_activation_cost.ipynb) |
+| Geometry | Render figures from the reference measurements | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/main/colab/00_geometry.ipynb) |
+| Saturation | Run the paired energy and magnitude study | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/main/colab/01_saturation.ipynb) |
+| HSV recall | Run recall under symbol and HSV corruption | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/main/colab/02_hsv_recall.ipynb) |
+| Activation cost | Benchmark exact nearest-symbol methods | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Fideliszan/complex-valued-voronoi-hopfield/blob/main/colab/03_activation_cost.ipynb) |
 
-**Validated directly in Colab (19 October 2026):** all four v1.0.2 notebooks completed full execution from these GitHub links. Scientific results reproduced within 1e-9; all five paper figures were regenerated with matching plotting data and regular Termes typography. PNG rendering and hardware-dependent timings can differ. [Run record and evidence limits](validation/colab_v1.0.2/README.md).
+These links use the current `main` branch. Set `MODE` and the save switches in the first code cell, then choose **Runtime → Run all**. Runs record the actual source revision. Notebooks are committed without execution outputs. [Colab instructions](docs/USAGE.md#google-colab).
 
-Select **Runtime → Run all**. Each notebook downloads the tagged public source, defaults to `MODE = "full"`, records its environment, and exports its results. Use `"smoke"` for a short execution check. The first code cell also holds the global switches `SAVE_DATA` and `SAVE_FIGURES`, which decide whether a run keeps its data and figures. See [Colab instructions](docs/USAGE.md#google-colab) and [save switches](docs/USAGE.md#save-switches).
+## Repository contents
 
-### What the data show
-
-At the reported settings, all 1,600 saturation trajectories and all 2,400 main recall trajectories reached a fixed point. In the QAM/uniform saturation condition, Voronoi dynamics ended at mean normalized squared norm 0.598 and maximum-modulus occupation 0.299. For 64-QAM with HSV noise level 0.10, Voronoi dynamics recovered the exact target in 27 of 30 trials. These are condition-specific observations, not universal recovery guarantees.
-
-The companion includes a separate full Google Colab replication of the numerical protocols. Scientific outputs agree with the paper to numerical tolerance; runtime measurements are retained separately because machines differ. [Validation and scope](docs/VALIDATION.md).
-
-## Metrics
-
-| Quantity | Definition and interpretation |
+| Path | Purpose |
 |---|---|
-| Classical energy | `E_c = -Re(s* W s)/2`; descent diagnostic for the classical rule |
-| Inertial energy | `E_r = E_c + ||s||²/2`; descent diagnostic for Voronoi dynamics |
-| Normalized squared norm | `rho = ||s||² / (N Rmax²)` |
-| Boundary occupation | Fraction of symbols with modulus `Rmax` |
-| Symbol error rate (SER) | Fraction of neurons differing from the intended target |
-| Exact recovery | All target symbols correct; averaged across trials |
-| Radial error | Mean absolute modulus error, normalized by `Rmax` |
-| Query time | Measured microseconds per query; environment dependent |
+| `src/cvhnn/` | Numerical algorithms, search methods, configuration, and experiment runner |
+| `experiments/`, `colab/`, `examples/` | Command-line entrypoints, notebooks, and a minimal example |
+| `configs/` | Ordered alphabet coordinates; array order determines tie resolution |
+| `data/paper/` | Frozen trial-level reference measurements, including machine-specific timings |
+| `figures/`, `tables/` | Selected reference figures, plotting data, and expected numerical tables |
+| `validation/` | Hash manifests, coordinate audits, and separately recorded hosted measurements |
+| `scripts/`, `tests/`, `docs/` | Generation tools, scientific checks, and documentation |
+| `runs/` | New execution outputs; ignored by Git |
 
-[Full definitions and interpretation](docs/METHODS.md#metrics).
-
-## Project Structure
-
-```text
-├── src/cvhnn/          # Numerical algorithms, search methods, and experiment protocols
-├── experiments/       # One Python entrypoint per experiment
-├── colab/             # Four runnable notebooks
-├── configs/           # Explicit ordered alphabet coordinates
-├── data/paper/        # Trial-level publication measurements
-├── figures/           # Paper PDFs, README images, and source data
-├── tables/            # Generated CSV and LaTeX tables
-├── paper/             # Manuscript, bibliography, and paper assets
-├── validation/        # Numerical audits and separate hosted measurements
-├── scripts/           # Rendering, checking, notebook, and packaging tools
-├── tests/             # Mathematical unit tests
-├── examples/          # Minimal working example
-├── docs/              # Methods, usage, and validation
-└── .github/           # Continuous integration and contribution templates
-```
+Regenerable summaries, query arrays, and notebook outputs are produced by code instead of being committed. Frozen reference measurements are retained so a new execution can be compared with the recorded result. Benchmark timings belong to their original machine and should not be replaced by another machine's timings. [Data policy and generators](docs/USAGE.md#what-is-stored-and-what-is-regenerated).
 
 ## Reproducibility
 
-The paper configuration runs 1,600 saturation trajectories, 2,400 noise-recall trajectories, and 64 exploratory load trajectories, plus a separate two-rule illustration. The query benchmark evaluates 120 method/input/alphabet combinations with five repetitions. Every run records its configuration and numerical environment.
+`check_consistency.py` validates frozen hashes, regenerated tables, reference numerical values, notebook structure, geometry, and hosted numerical records without requiring manuscript sources. Unit tests compare independent numerical kernels against direct field and energy recomputation. A full run compares scientific quantities with the reference at absolute tolerance `1e-9`; timings are assessed separately because they depend on the host. [Evidence and limitations](docs/VALIDATION.md).
 
-The default engine independently implements the activation rules, weight matrices, asynchronous updates, corruptions, and metrics. It records an energy check at every changed coordinate. Unit tests compare small trajectories with full field/energy recomputation; stored full-run audits check energy descent and terminal decisions.
+## Citation and license
 
-Explicit ordered coordinates in `configs/ordered_alphabets.json` prevent platform-dependent ordering of equal-radius symbols. Conservative tie handling retains the current state when it belongs to the numerical minimizing set. Every activation-cost run regenerates all benchmark field/current-symbol pairs from fixed seeds. The selected HSV illustration uses the disclosed successful trial with seed 120044901; aggregate tables include all trials.
+Use [CITATION.cff](CITATION.cff) or GitHub's **Cite this repository** button, and record the exact commit and execution configuration. Historical validation records identify the version they tested; they do not certify a later checkout.
 
-`scripts/check_consistency.py` verifies dataset hashes, generated tables, five manuscript figures, citation keys, notebook structures, geometry, hosted measurements, and quoted manuscript values. The CI matrix runs these checks on Linux and Windows with Python 3.12 and 3.13. [Complete protocol](docs/EXPERIMENTS.md) · [Numerical conventions](docs/METHODS_AUDIT.md).
-
-## Citation
-
-Use [CITATION.cff](CITATION.cff) or GitHub's **Cite this repository** button. Cite version **v1.0.2** and record the exact commit and execution configuration. The paper explicitly cites this public companion.
-
-## License
-
-Code and repository documentation: [MIT](LICENSE). Original synthetic data, generated tables, and figures: [CC BY 4.0](LICENSE-DATA.md). The manuscript in `paper/` is excluded from those grants and remains copyrighted by its authors. Third-party packages and publisher classes retain their own licenses.
-
-Figure fonts are distributed under their own [GUST Font License](assets/fonts/GUST-FONT-LICENSE.txt); see the [font derivation note](assets/fonts/DERIVATION.txt).
+Code and documentation: [MIT](LICENSE). Synthetic data, numerical tables, and figures: [CC BY 4.0](LICENSE-DATA.md). Figure fonts retain their [GUST Font License](assets/fonts/GUST-FONT-LICENSE.txt); see the [font derivation note](assets/fonts/DERIVATION.txt). The manuscript remains outside these license grants.

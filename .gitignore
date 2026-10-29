@@ -4,16 +4,36 @@ __pycache__/
 .ipynb_checkpoints/
 .pytest_cache/
 .matplotlib/
-runs/
+*.egg-info/
+build/
+/dist/
+
+# New runs and regenerated outputs; committed reference files remain tracked.
+/runs/
+/output/
+/outputs/
+/data/queries/
+/data/paper/*_summary.csv
+/data/paper/experiment1_pairwise_comparison.csv
+/data/paper/experiment1_weight_validation.csv
+/data/paper/experiment2_visual_example_metrics.csv
+/data/paper/experiment3_local_field_diagnostics.csv
+/data/paper/experiment1_trajectories.csv
+/figures/*.svg
+/figures/*.png
+/figures/*.pdf
+/figures/source_data/
+/tables/
+/validation/geometry_check.json
+
+# Manuscript sources and submission/compilation records are maintained privately.
+/paper/
+/validation/overleaf_*/
+/validation/tnnls_anonymous_*/
+/validation/compilation.json
+/validation/figure_typography.json
 *.aux
 *.log
 *.out
 *.blg
 *.synctex.gz
-paper/main.pdf
-paper/main.bbl
-
-# Rewritten by scripts/verify_geometry.py on every check (platform-dependent last digits).
-validation/geometry_check.json
-*.egg-info/
-build/

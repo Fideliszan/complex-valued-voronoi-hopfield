@@ -1,7 +1,9 @@
 # Contributing
 
-Keep code, raw results, figures, and manuscript claims traceable. Open an issue describing the problem and a minimal reproducible example. Create a branch, make a focused change, run `python -m unittest discover -s tests -v` and `python scripts/check_consistency.py`, and submit a pull request.
+Keep code, experimental inputs, and numerical references traceable. Open an issue describing the problem and a minimal example. Make a focused change on a branch, run `python -m unittest discover -s tests -v` and `python scripts/check_consistency.py`, then submit a pull request.
 
-Code style is enforced in CI with [Ruff](https://docs.astral.sh/ruff/) (configured in `pyproject.toml`): run `python -m pip install ruff==0.17.1`, then `ruff check .` and `ruff format .` before committing. Run-level settings (paths, stages, smoke sizes, comparison tolerance, save switches) live in `src/cvhnn/config.py`; protocol constants stay at the top of their experiment module, because each run records them in `execution.json`. Shared figure colors and typography live in `src/cvhnn/style.py`.
+CI enforces [Ruff](https://docs.astral.sh/ruff/): install `ruff==0.17.1`, run `ruff check .`, then `ruff format .`. Run-level settings belong in `src/cvhnn/config.py`; experimental constants stay with their protocol and are recorded in `execution.json`. Shared figure colors and typography live in `src/cvhnn/style.py`.
 
-Never overwrite archived data. New numerical results need explicit configuration, environment, seeds, comparison reports, and review of affected tables and text. Do not commit credentials, private paths, notebook tokens, or unlicensed datasets. Discuss changes to the scientific protocol before presenting them as the paper reproduction.
+Store new results under `runs/`, leave notebook outputs cleared, and avoid committing files the code regenerates. Keep frozen reference measurements, especially machine-specific timings, unless an intentional scientific update reviews their configuration, seeds, environment, comparisons, and hashes. After changing notebook code, run `python scripts/execute_notebooks.py --record validation/notebook_execution.json` to refresh the full-execution record. Keep committed notebook outputs and execution counts cleared.
+
+The public source excludes manuscript text and submission packages. Keep those outside the tracked tree. Do not commit credentials, private paths, notebook tokens, or unlicensed datasets. Discuss protocol changes before presenting their output as reproduction of the reference experiment.
