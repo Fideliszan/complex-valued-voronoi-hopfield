@@ -1,40 +1,28 @@
 # Validation and reproducibility
 
-[Home](../README.md) · [Methods](METHODS.md) · [Usage and paper map](USAGE.md#paper-to-code-map)
+[Home](../README.md) · [Methods](METHODS.md) · [Usage](USAGE.md)
 
-## Publication evidence
+## Frozen reference evidence
 
-The manuscript uses `data/paper`. Publication-host environment records (`validation/publication_run.json`) and coordinate audits are in `validation/`. Hash manifests protect these inputs against silent modification. The 640,000 benchmark field/current-symbol pairs are regenerated from fixed seeds by every activation-cost run; the SHA-256 hashes of the publication copies remain in `validation/query_manifest.json`, and the files themselves remain in the v1.0.2 release.
+`data/paper/` contains the trial-level numerical baseline. Reference-host configuration and environment records are consolidated in `validation/publication_run.json`; coordinate audits and hash manifests are stored alongside it. The 640,000 benchmark field/current-symbol pairs are regenerated from fixed seeds. `validation/query_manifest.json` records the original array hashes.
 
-The default numerical implementation is checked against direct field and energy recomputation in unit tests. Full runs audit every changed coordinate and every terminal state. The full protocol records 1,600 saturation trajectories and 2,466 recall trajectories (2,400 noise trials, 64 load trials, two default image trajectories). Their 1,587,062 changed coordinates have no reported energy increases or terminal-rule violations.
+The default independent implementation is tested against direct field and energy recomputation. Full runs audit every changed coordinate and every terminal state. The reference protocol records 1,600 saturation trajectories and 2,466 recall trajectories: 2,400 noise trials, 64 load trials, and two image trajectories. Their recorded 1,587,062 coordinate changes have no reported energy increases or terminal-rule violations.
 
 ## Hosted measurements
 
-`validation/hosted` contains a full scientific replication on a Google Colab CPU runtime, completed on 19 October 2026 UTC. The measurements, actual numerical environments, and coordinate audits are retained separately from the publication-host data. These records validate the experimental kernels and figure inputs; they are distinct from the newly packaged public-download notebook setup.
+`validation/hosted/` preserves a separate full Google Colab CPU replication completed on 19 October 2026 UTC, with trial data, environments, timings, coordinate audits, and comparison records. These are historical measurements, not a claim that the current checkout has just been run on Colab.
 
-All 129,600 saturation history records agree exactly after CSV parsing; because the two tables are identical, only the comparison record (`hosted/saturation/hosted_comparison.json`) is archived and the shared table is `data/paper/experiment1_trajectories.csv.gz`. Recall outcomes, symbol errors, and stopping counts agree; the largest recall energy difference is below 4×10^-13. All 61,380 tested boundary decisions agree with exhaustive nearest-symbol search. The benchmark has 120 configurations and 600 timing records. Timing ratios across the two machines range from approximately 0.63 to 4.98; do not mix them into one publication curve.
+All 129,600 saturation history records agreed exactly after CSV parsing. The identical duplicate history is represented by its comparison record and the shared compressed reference CSV. Recall outcomes, symbol errors, and stopping counts agreed; the largest recorded recall energy difference was below 4×10^-13. All 61,380 tested boundary decisions agreed with exhaustive nearest-symbol search. The benchmark contains 120 configurations and 600 timing records. Machine-dependent timing ratios ranged approximately from 0.63 to 4.98; the two hosts' timings must not be mixed into one curve.
 
-The geometry rendering reproduces the five paper figures, including the selected HSV image. The selected image is a disclosed successful case, while tables include all trials. The small load sweep is exploratory. Noise replicates use a fixed synthetic memory bank and are not independent memory-bank samples.
+## Historical public Colab validation
 
-## Public GitHub-to-Colab validation of v1.0.2
+All four public GitHub-linked **v1.0.2** notebooks completed full execution directly in Colab on 19 October 2026, including their tagged download and dependency installation. The [run record](../validation/colab_v1.0.2/README.md) and [structured audit](../validation/colab_v1.0.2/validation.json) identify the exact commit, environment, and evidence limits.
 
-On 19 October 2026, all four public GitHub-linked notebooks of **v1.0.2** completed full execution directly in Google Colab, including the tagged clone and dependency-installation setup. The [run record](../validation/colab_v1.0.2/README.md) and [structured audit](../validation/colab_v1.0.2/validation.json) document the exact source commit and observed environment.
+That run reproduced 1,600 final saturation rows and 129,600 history rows exactly. The 2,400 noise-recall and 64 load rows matched within `1e-9`. All tested activation decisions agreed. Figure plotting-data CSVs matched after parsing, while PNG rendering and benchmark timings varied by environment. Raw-output ZIP and executed-notebook downloads did not complete; the older `validation/hosted/` measurements are separate evidence.
 
-Saturation reproduced 1,600 final rows and 129,600 history rows exactly. The 2,400 noise-recall and 64 load-trial rows matched within 1e-9, with a maximum numerical difference below 4e-13. The benchmark produced 600 timing records, 100% activation agreement, and zero disagreements in 61,380 boundary queries.
-
-All five paper figures were generated. Their six plotting-data CSVs matched after parsing, and regular Termes figure typography was retained. PNGs are not pixel-identical across rendering environments, and newly measured benchmark timings are machine-dependent. Notebook 00 renders publication data and recomputes the selected image; notebooks 01-03 rerun the experimental protocols.
-
-The record preserves live audit outputs and package versions. Raw-output ZIP and executed-notebook downloads did not complete; earlier `validation/hosted` data are separate evidence. The v1.0.2 release assets and tag remain unchanged.
-
-## Overleaf validation of the updated ZIP
-
-The Colab-validated ZIP was imported into a [new Overleaf project](https://www.overleaf.com/project/6ad60897f64e207c3401375d) on 19 October 2026. It compiled to **14 pages with 0 errors and 0 warnings**. All 14 rendered pages match the previous validated PDF at the tested resolution, preserving all five figures and the page layout. The imported project also contains both Colab validation records. See the [verification method and package identity](../validation/overleaf_colab_validated_v1.0.2/README.md) and [structured record](../validation/overleaf_colab_validated_v1.0.2/validation.json).
+Current README badges use `main`. Historical validation records apply only to their recorded revisions; a change to notebook code requires a new execution record.
 
 ## Run the checks
-
-The four distributed notebooks also completed a full local execution from top to bottom. The repository stores them without outputs; [notebook records](../validation/notebook_execution.json) identify the executed code cells of the current notebooks, and the numerical comparison (`local_comparison.json` in [publication_run.json](../validation/publication_run.json)) records zero differences in the compared saturation and recall metrics. All six geometry plotting-data files match their publication counterparts. These checks exercise the local setup path; the public Colab setup uses the tagged GitHub clone described in [Colab instructions](USAGE.md#google-colab).
-
-The manuscript compiled locally with pdfLaTeX and BibTeX to 14 pages without errors or layout warnings; see [Compilation record](../validation/compilation.json).
 
 ```bash
 python -m unittest discover -s tests -v
@@ -42,12 +30,16 @@ python scripts/check_consistency.py
 python reproduce_all.py --mode full --output runs/independent_full
 ```
 
-The consistency check verifies hashes, table regeneration, figure equality, citation keys, notebook structure, geometry, hosted numerical records, and quoted manuscript values. A fresh full run compares scientific quantities at absolute tolerance 1e-9; timestamps and hardware-dependent timings are excluded. The benchmark requires exact agreement of all tested activation decisions.
+The consistency check validates frozen hashes, reaggregated reference tables and numerical values, notebook structure and execution records, geometry, and preserved hosted measurements. These checks do not require manuscript text, a bibliography, a LaTeX installation, or manuscript compilation records.
 
-The theorem concerns exact minimizers; the implementation has explicit floating-point tie tolerances. Experimental success is not a proof of universal recall. CI results indicate the tested software environments, not a guarantee for all future package versions or hosted runtimes.
+Run `python scripts/execute_notebooks.py` to execute all four notebooks in full mode and write a new record under `runs/`. After an intentional notebook update, refresh the checked-in evidence with `python scripts/execute_notebooks.py --record validation/notebook_execution.json`. Committed notebook outputs and execution counts remain cleared.
 
-## Final release archive and anonymous review copy
+`validation/notebook_execution.json` records full local notebook execution and code-cell hashes. It exercises the local setup path; it does not by itself certify a fresh Colab download/install session. The historical local comparison in `validation/publication_run.json` remains tied to the original execution.
 
-The [exact final identified ZIP](../validation/overleaf_final_v1.0.2/README.md) was subsequently imported and compiled in Overleaf, confirming both validation directories and all five figures. A separate [anonymous manuscript-only copy](../validation/tnnls_anonymous_v1.0.2/README.md) also compiled with zero errors and warnings. Both PDFs have 14 pages. See the [TNNLS format review](TNNLS_FINAL_REVIEW.md) for submission-specific requirements.
+A fresh full run compares scientific quantities at absolute tolerance `1e-9`; timestamps and hardware-dependent timings are excluded from numerical equality. Activation benchmarks require exact agreement of tested decisions. Inspect the new run's `comparison.json` and environment records.
 
-The [AI-disclosure Overleaf validation](../validation/overleaf_ai_disclosure_v1.0.2/README.md) confirms 14 pages, zero errors and warnings, and the exact declaration on page 13. This record is included in the final complete delivery ZIP.
+## Limits
+
+The convergence result concerns exact minimizers; code uses documented floating-point tie tolerances. Finite test cases and successful retrieval experiments do not prove universal recall. The selected HSV image is a disclosed successful trial, while aggregate tables include all trials. The small load sweep is exploratory, and noise replicates reuse a fixed synthetic memory bank.
+
+CI checks cover the declared operating-system and Python matrix. They do not guarantee compatibility with every future package version or hosted runtime. Frozen timing measurements and historical validation records are preserved as evidence rather than silently regenerated.
