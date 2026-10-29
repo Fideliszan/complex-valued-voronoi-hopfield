@@ -39,13 +39,13 @@ from __future__ import annotations
 import math
 import shutil
 import time
+from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterable, List, Sequence, Tuple
+from typing import Any
 
 import numpy as np
 import pandas as pd
-
 
 # =========================
 # User-facing configuration
@@ -137,13 +137,14 @@ def make_hexagonal(m: int = 19, search_radius: int = 3) -> np.ndarray:
     return normalize_alphabet(selected)
 
 
-def build_alphabets() -> Dict[str, np.ndarray]:
+def build_alphabets() -> dict[str, np.ndarray]:
     """Load published symbol coordinates and order, independent of libm sorting."""
     from .ordered_alphabets import load_group
+
     return load_group("saturation")
 
 
-def generate_alphabets() -> Dict[str, np.ndarray]:
+def generate_alphabets() -> dict[str, np.ndarray]:
     return {
         "16-PSK": make_psk(16),
         "16-QAM": make_qam(4),
@@ -152,7 +153,7 @@ def generate_alphabets() -> Dict[str, np.ndarray]:
     }
 
 
-def alphabet_summary(alphabet: np.ndarray) -> Dict[str, Any]:
+def alphabet_summary(alphabet: np.ndarray) -> dict[str, Any]:
     radii = np.abs(alphabet)
     rmax = radii.max()
     rounded_radii = np.unique(np.round(radii, 6))
@@ -210,7 +211,7 @@ def hermitian_weight_matrix(
     return w.astype(np.complex128)
 
 
-def validate_weight_matrix(w: np.ndarray) -> Dict[str, Any]:
+def validate_weight_matrix(w: np.ndarray) -> dict[str, Any]:
     diag = np.diag(w)
     hermitian_error = float(np.max(np.abs(w - w.conj().T)))
     max_diag_imag = float(np.max(np.abs(np.imag(diag))))
@@ -280,7 +281,7 @@ def compute_metrics(
     state: np.ndarray,
     field: np.ndarray,
     alphabet: np.ndarray,
-) -> Tuple[float, float, float, float]:
+) -> tuple[float, float, float, float]:
     n = len(state)
     rmax = float(np.max(np.abs(alphabet)))
     ec = -0.5 * float(np.real(np.vdot(state, field)))
@@ -426,12 +427,10 @@ def build_pairwise_comparison(summary_df: pd.DataFrame) -> pd.DataFrame:
                     "init_protocol": protocol,
                     "alphabet": alphabet,
                     "classic_minus_voronoi_final_rho": float(
-                        by_rule.loc["classic", "final_rho_mean"]
-                        - by_rule.loc["voronoi", "final_rho_mean"]
+                        by_rule.loc["classic", "final_rho_mean"] - by_rule.loc["voronoi", "final_rho_mean"]
                     ),
                     "classic_minus_voronoi_final_boundary": float(
-                        by_rule.loc["classic", "final_boundary_mean"]
-                        - by_rule.loc["voronoi", "final_boundary_mean"]
+                        by_rule.loc["classic", "final_boundary_mean"] - by_rule.loc["voronoi", "final_boundary_mean"]
                     ),
                     "classic_minus_voronoi_steps": float(
                         by_rule.loc["classic", "steps_mean"] - by_rule.loc["voronoi", "steps_mean"]
@@ -514,12 +513,10 @@ def write_text_outputs(
         "amplitude saturation boundary under the classical rule.",
         "",
     ]
-    (OUTPUT_DIR / "experiment1_numerical_report.txt").write_text(
-        "\n".join(report_lines), encoding="utf-8"
-    )
+    (OUTPUT_DIR / "experiment1_numerical_report.txt").write_text("\n".join(report_lines), encoding="utf-8")
 
 
-def run_experiment() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def run_experiment() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     alphabets = build_alphabets()
     master_rng = np.random.default_rng(RANDOM_SEED)
@@ -538,10 +535,7 @@ def run_experiment() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     for alphabet_name, alphabet in alphabets.items():
         for protocol in INITIALIZATION_PROTOCOLS:
             starts = initial_pool(alphabet, protocol)
-            print(
-                f"Running {alphabet_name}, protocol={protocol}: "
-                f"|S|={len(alphabet)}, initial pool={len(starts)}"
-            )
+            print(f"Running {alphabet_name}, protocol={protocol}: |S|={len(alphabet)}, initial pool={len(starts)}")
 
             for run in range(N_RUNS):
                 run_seed = int(master_rng.integers(0, 2**32 - 1))
@@ -603,8 +597,7 @@ def run_experiment() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
                             "delta_E_c": final["E_c"] - initial["E_c"],
                             "delta_E_r": final["E_r"] - initial["E_r"],
                             "delta_rho": final["rho"] - initial["rho"],
-                            "delta_boundary_fraction": final["boundary_fraction"]
-                            - initial["boundary_fraction"],
+                            "delta_boundary_fraction": final["boundary_fraction"] - initial["boundary_fraction"],
                             "steps_to_convergence": traj.steps_to_convergence,
                             "converged": traj.converged,
                             "monotonicity_violations": traj.monotonicity_violations,
@@ -661,7 +654,7 @@ def mean_std_by_sweep(
     init_protocol: str,
     rule: str,
     metric: str,
-) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     subset = history_df[
         (history_df["alphabet"] == alphabet)
         & (history_df["init_protocol"] == init_protocol)
@@ -746,7 +739,7 @@ def make_alphabet_summary_figure(final_df: pd.DataFrame, init_protocol: str) -> 
     x = np.arange(len(alphabets))
     width = 0.36
 
-    for ax, (metric, title) in zip(axes.flat, metrics):
+    for ax, (metric, title) in zip(axes.flat, metrics, strict=True):
         for offset, rule in [(-width / 2, "classic"), (width / 2, "voronoi")]:
             means = []
             errs = []
@@ -790,16 +783,12 @@ def make_energy_monotonicity_figure(history_df: pd.DataFrame, init_protocol: str
         fontsize=14,
     )
 
-    for ax, alphabet in zip(axes.flat, alphabets):
-        x, mean, std = mean_std_by_sweep(
-            history_df, alphabet, init_protocol, "classic", "E_c"
-        )
+    for ax, alphabet in zip(axes.flat, alphabets, strict=True):
+        x, mean, std = mean_std_by_sweep(history_df, alphabet, init_protocol, "classic", "E_c")
         ax.plot(x, mean, color="#C62828", lw=2.0, label=r"Classical: $E_c$")
         ax.fill_between(x, mean - std, mean + std, color="#C62828", alpha=0.14, lw=0)
 
-        x, mean, std = mean_std_by_sweep(
-            history_df, alphabet, init_protocol, "voronoi", "E_r"
-        )
+        x, mean, std = mean_std_by_sweep(history_df, alphabet, init_protocol, "voronoi", "E_r")
         ax.plot(x, mean, color="#1565C0", lw=2.0, label=r"$\mathcal{D}_{\mathcal{S}}$: $E_r$")
         ax.fill_between(x, mean - std, mean + std, color="#1565C0", alpha=0.14, lw=0)
 
@@ -834,11 +823,10 @@ if __name__ == "__main__":
     print(f"ZIP archive: {archive.resolve()}")
 
     try:
-        from google.colab import files  # type: ignore
+        from google.colab import files  # type: ignore  # noqa: F401  (probe: detects a Colab runtime)
 
         print("\nColab detected. The ZIP can be downloaded from the file browser.")
         # Uncomment the next line to open a download dialog automatically.
         # files.download(str(archive))
     except Exception:
         pass
-

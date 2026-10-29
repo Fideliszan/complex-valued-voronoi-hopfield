@@ -1,10 +1,10 @@
 # Validation and reproducibility
 
-[Home](../README.md) · [Methods](METHODS_AUDIT.md) · [Paper map](PAPER_MAP.md)
+[Home](../README.md) · [Methods](METHODS.md) · [Usage and paper map](USAGE.md#paper-to-code-map)
 
 ## Publication evidence
 
-The manuscript uses `data/paper`. Publication-host environment records and coordinate audits are in `validation/`. The 32 files in `data/queries` store all 640,000 benchmark field/current-symbol pairs. Hash manifests protect these inputs against silent modification.
+The manuscript uses `data/paper`. Publication-host environment records (`validation/publication_run.json`) and coordinate audits are in `validation/`. Hash manifests protect these inputs against silent modification. The 640,000 benchmark field/current-symbol pairs are regenerated from fixed seeds by every activation-cost run; the SHA-256 hashes of the publication copies remain in `validation/query_manifest.json`, and the files themselves remain in the v1.0.2 release.
 
 The default numerical implementation is checked against direct field and energy recomputation in unit tests. Full runs audit every changed coordinate and every terminal state. The full protocol records 1,600 saturation trajectories and 2,466 recall trajectories (2,400 noise trials, 64 load trials, two default image trajectories). Their 1,587,062 changed coordinates have no reported energy increases or terminal-rule violations.
 
@@ -12,7 +12,7 @@ The default numerical implementation is checked against direct field and energy 
 
 `validation/hosted` contains a full scientific replication on a Google Colab CPU runtime, completed on 19 October 2026 UTC. The measurements, actual numerical environments, and coordinate audits are retained separately from the publication-host data. These records validate the experimental kernels and figure inputs; they are distinct from the newly packaged public-download notebook setup.
 
-All 129,600 saturation history records agree exactly after CSV parsing. Recall outcomes, symbol errors, and stopping counts agree; the largest recall energy difference is below 4×10^-13. All 61,380 tested boundary decisions agree with exhaustive nearest-symbol search. The benchmark has 120 configurations and 600 timing records. Timing ratios across the two machines range from approximately 0.63 to 4.98; do not mix them into one publication curve.
+All 129,600 saturation history records agree exactly after CSV parsing; because the two tables are identical, only the comparison record (`hosted/saturation/hosted_comparison.json`) is archived and the shared table is `data/paper/experiment1_trajectories.csv.gz`. Recall outcomes, symbol errors, and stopping counts agree; the largest recall energy difference is below 4×10^-13. All 61,380 tested boundary decisions agree with exhaustive nearest-symbol search. The benchmark has 120 configurations and 600 timing records. Timing ratios across the two machines range from approximately 0.63 to 4.98; do not mix them into one publication curve.
 
 The geometry rendering reproduces the five paper figures, including the selected HSV image. The selected image is a disclosed successful case, while tables include all trials. The small load sweep is exploratory. Noise replicates use a fixed synthetic memory bank and are not independent memory-bank samples.
 
@@ -32,7 +32,7 @@ The Colab-validated ZIP was imported into a [new Overleaf project](https://www.o
 
 ## Run the checks
 
-The four distributed notebooks also completed a full local execution from top to bottom. Their saved outputs are actual execution results. [Notebook records](../validation/notebook_execution.json) identify the executed code cells, and the [numerical comparison](../validation/local_comparison.json) records zero differences in the compared saturation and recall metrics. All six geometry plotting-data files match their publication counterparts. These checks exercise the local setup path; the public Colab setup uses the tagged GitHub clone described in [Colab instructions](COLAB.md).
+The four distributed notebooks also completed a full local execution from top to bottom. The repository stores them without outputs; [notebook records](../validation/notebook_execution.json) identify the executed code cells of the current notebooks, and the numerical comparison (`local_comparison.json` in [publication_run.json](../validation/publication_run.json)) records zero differences in the compared saturation and recall metrics. All six geometry plotting-data files match their publication counterparts. These checks exercise the local setup path; the public Colab setup uses the tagged GitHub clone described in [Colab instructions](USAGE.md#google-colab).
 
 The manuscript compiled locally with pdfLaTeX and BibTeX to 14 pages without errors or layout warnings; see [Compilation record](../validation/compilation.json).
 

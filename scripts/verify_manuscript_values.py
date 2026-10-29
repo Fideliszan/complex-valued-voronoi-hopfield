@@ -1,17 +1,16 @@
 """Cross-check manuscript tables, plotted aggregates, and quoted numerical values."""
-from pathlib import Path
+
 import argparse
 import json
 import shutil
 import tempfile
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 from build_tables import build
-
-ROOT = Path(__file__).resolve().parents[1]
-HOSTED = ROOT / "validation/hosted"
+from cvhnn.config import HOSTED, ROOT, SELECTED_HSV_SEED
 
 
 def verify():
@@ -33,17 +32,24 @@ def verify():
             assert (tmp / "tables" / name).read_text() == (ROOT / "paper/Tables" / name).read_text(), name
 
     # Figure 3: every mean and sample standard deviation, not only endpoints.
-    history = pd.read_csv(HOSTED / "saturation/experiment1_trajectories.csv")
+    # Identical to the hosted history (see validation/hosted/saturation/hosted_comparison.json).
+    history = pd.read_csv(ROOT / "data/paper/experiment1_trajectories.csv.gz")
     subset = history.query('alphabet == "16-QAM" and init_protocol == "uniform"')
-    expected = subset.groupby(["rule", "sweep"])[["E_c", "E_r", "rho", "boundary_fraction"]].agg(["mean", "std"]).reset_index()
+    expected = (
+        subset.groupby(["rule", "sweep"])[["E_c", "E_r", "rho", "boundary_fraction"]].agg(["mean", "std"]).reset_index()
+    )
     plotted = pd.read_csv(ROOT / "figures/source_data/saturation_plot.csv", header=[0, 1])
     assert list(expected["rule"]) == list(plotted.iloc[:, 0])
-    np.testing.assert_allclose(expected.iloc[:, 1:].to_numpy(dtype=float), plotted.iloc[:, 1:].to_numpy(dtype=float), rtol=1e-13, atol=1e-13)
+    np.testing.assert_allclose(
+        expected.iloc[:, 1:].to_numpy(dtype=float), plotted.iloc[:, 1:].to_numpy(dtype=float), rtol=1e-13, atol=1e-13
+    )
 
     # Figure 5: publication timings stay distinct from the hosted timings.
     raw = pd.read_csv(ROOT / "data/paper/experiment3_raw_timings.csv")
     keys = ["ensemble", "family", "cardinality", "method"]
-    expected_cost = raw.groupby(keys, as_index=False).agg(median=("time_per_query_us", "median"), lower=("time_per_query_us", "min"), upper=("time_per_query_us", "max"))
+    expected_cost = raw.groupby(keys, as_index=False).agg(
+        median=("time_per_query_us", "median"), lower=("time_per_query_us", "min"), upper=("time_per_query_us", "max")
+    )
     plotted_cost = pd.read_csv(ROOT / "figures/source_data/activation_scaling.csv")
     matched = expected_cost.merge(plotted_cost, on=keys, validate="one_to_one", suffixes=("_raw", "_plot"))
     assert len(matched) == len(expected_cost) == len(plotted_cost) == 120
@@ -66,14 +72,16 @@ def verify():
 
     # Figure 4 is the disclosed selected trial, distinct from the default image run.
     visual = pd.read_csv(HOSTED / "geometry/source_data/paper_visual_metrics.csv").set_index("rule")
-    assert visual.trial_seed.eq(120044901).all()
-    assert "120044901" in tex
+    assert visual.trial_seed.eq(SELECTED_HSV_SEED).all()
+    assert str(SELECTED_HSV_SEED) in tex
     for column, digits in [("initial_SER", 3), ("SER", 3), ("rgb_psnr", 2)]:
         assert f"{visual.loc['classic', column]:.{digits}f}" in tex
     assert visual.loc["voronoi", "SER"] == visual.loc["voronoi", "radial_error"] == 0
     assert visual.loc["voronoi", "rgb_psnr"] == 100
     recall = pd.read_csv(HOSTED / "recall/experiment2_noise_results.csv")
-    qam_hsv = recall.query('alphabet == "64-QAM" and corruption_kind == "hsv" and noise_level == 0.1 and rule == "voronoi"')
+    qam_hsv = recall.query(
+        'alphabet == "64-QAM" and corruption_kind == "hsv" and noise_level == 0.1 and rule == "voronoi"'
+    )
     assert len(qam_hsv) == 30 and int(qam_hsv.exact_recovery.sum()) == 27
     assert "90\\%" in tex
 
@@ -98,7 +106,9 @@ def verify():
         "projection_residual": {
             "publication": publication_residual,
             "hosted": hosted_text_values["max_projection_residual"],
-            "interpretation": "The manuscript explicitly quotes both host measurements; the difference is floating-point roundoff",
+            "interpretation": (
+                "The manuscript explicitly quotes both host measurements; the difference is floating-point roundoff"
+            ),
         },
         "qam_hsv_exact_recovery": "27/30 = 90%",
         "timing_extreme_cardinality_rankings": "Verified independently for both hosts",
